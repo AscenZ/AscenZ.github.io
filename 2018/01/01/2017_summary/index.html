@@ -2,15 +2,27 @@
 
 
 
+
+
+
+
+
+
+
+
+
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
+
+
+
 
 
 
@@ -38,10 +50,6 @@
 
 
 
-  
-  
-  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -50,48 +58,25 @@
 
 <link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+<link href="/blog/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/stan-touch.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/stan-32x32.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/stan-16x16.png?v=6.4.1">
 
 
-  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="年度总结," />
+  <link rel="mask-icon" href="/blog/images/stan.svg?v=6.4.1" color="#222">
 
 
 
 
 
 
-
-
-
-
-<meta name="description" content="学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式 不仅如此，当你发现了一个新的领域（虽然很小），你就会发现其他东西，我学习了RESTful API设计，">
-<meta name="keywords" content="年度总结">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2017又结束啦感觉过的挺迷茫的还是总结一下吧">
-<meta property="og:url" content="http://ascen.me/blog/2018/01/01/2017_summary/index.html">
-<meta property="og:site_name" content="Ascen的羽毛">
-<meta property="og:description" content="学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式 不仅如此，当你发现了一个新的领域（虽然很小），你就会发现其他东西，我学习了RESTful API设计，">
-<meta property="og:image" content="http://on1svswrl.bkt.clouddn.com/IMG_3585.jpg">
-<meta property="og:updated_time" content="2018-01-01T14:30:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2017又结束啦感觉过的挺迷茫的还是总结一下吧">
-<meta name="twitter:description" content="学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式 不仅如此，当你发现了一个新的领域（虽然很小），你就会发现其他东西，我学习了RESTful API设计，">
-<meta name="twitter:image" content="http://on1svswrl.bkt.clouddn.com/IMG_3585.jpg">
 
 
 
@@ -100,15 +85,13 @@
   var CONFIG = {
     root: '/blog/',
     scheme: 'Mist',
-    version: '5.1.4',
+    version: '6.4.1',
     sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -120,12 +103,39 @@
 </script>
 
 
+  
+
+
+
+
+  <meta name="description" content="学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式 不仅如此，当你发现了一个新的领域（虽然很小），你就会发现其他东西，我学习了RESTful API设计，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017又结束啦感觉过的挺迷茫的还是总结一下吧">
+<meta property="og:url" content="http://ascen.me/blog/2018/01/01/2017_summary/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式 不仅如此，当你发现了一个新的领域（虽然很小），你就会发现其他东西，我学习了RESTful API设计，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://on1svswrl.bkt.clouddn.com/IMG_3585.jpg">
+<meta property="og:updated_time" content="2018-09-24T16:55:49.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2017又结束啦感觉过的挺迷茫的还是总结一下吧">
+<meta name="twitter:description" content="学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式 不仅如此，当你发现了一个新的领域（虽然很小），你就会发现其他东西，我学习了RESTful API设计，">
+<meta name="twitter:image" content="http://on1svswrl.bkt.clouddn.com/IMG_3585.jpg">
+
+
+
+
+
 
   <link rel="canonical" href="http://ascen.me/blog/2018/01/01/2017_summary/"/>
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>2017又结束啦感觉过的挺迷茫的还是总结一下吧 | Ascen的羽毛</title>
   
@@ -137,9 +147,37 @@
 
 
 
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -155,19 +193,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/blog/"  class="brand" rel="start">
+      <a href="/blog/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Ascen的羽毛</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <h1 class="site-subtitle" itemprop="description"></h1>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -175,55 +211,61 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/blog/首页" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            Startseite
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/blog/关于我" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            Über
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/blog/标签" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+    <a href="/blog/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/blog/归档" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            Archiv
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/blog/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/blog/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/blog/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/blog/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -231,12 +273,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -249,6 +299,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -258,8 +310,8 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/blog/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -271,25 +323,50 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">2017又结束啦感觉过的挺迷茫的还是总结一下吧</h2>
+          <h2 class="post-title" itemprop="name headline">2017又结束啦感觉过的挺迷茫的还是总结一下吧
+              
+            
+          </h2>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-01T21:25:23+08:00">
-                2018-01-01
-              </time>
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-01 21:25:23" itemprop="dateCreated datePublished" datetime="2018-01-01T21:25:23+08:00">2018-01-01</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-25 00:55:49" itemprop="dateModified" datetime="2018-09-25T00:55:49+08:00">2018-09-25</time>
+              
             
           </span>
 
@@ -302,14 +379,17 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/年度总结/" itemprop="url" rel="index">
-                    <span itemprop="name">年度总结</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/总结报告/" itemprop="url" rel="index"><span itemprop="name">总结报告</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/总结报告/年度总结/" itemprop="url" rel="index"><span itemprop="name">年度总结</span></a></span>
 
                 
                 
@@ -325,7 +405,9 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/blog/2018/01/01/2017_summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2018/01/01/2017_summary/" itemprop="commentsCount"></span>
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/01/01/2017_summary/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -379,6 +461,9 @@
 
       
     </div>
+
+    
+
     
     
     
@@ -391,12 +476,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/blog/tags/年度总结/" rel="tag"># 年度总结</a>
-          
-        </div>
-      
 
       
       
@@ -406,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/04/15/rac_pit/" rel="next" title="RAC的一些坑">
-                <i class="fa fa-chevron-left"></i> RAC的一些坑
+              <a href="/blog/2017/06/20/im-app-developing/" rel="next" title="从零开发一个即时通讯APP">
+                <i class="fa fa-chevron-left"></i> 从零开发一个即时通讯APP
               </a>
             
           </div>
@@ -415,10 +494,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2018/08/03/2016_summary/" rel="prev" title="2016年度总结">
-                2016年度总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -434,24 +509,20 @@
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
 
-
-          
-
   
     <div class="comments" id="comments">
-      
-        <div id="gitment-container"></div>
-      
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     </div>
 
   
@@ -479,10 +550,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            站点概览
           </li>
         </ul>
       
@@ -491,57 +562,138 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/stan.png"
+                alt="Ascen Zhong" />
+            
               <p class="site-author-name" itemprop="name">Ascen Zhong</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">Ascen的个人博客</p>
           </div>
 
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
+          
+            <nav class="site-state motion-element">
               
-                <a href="/blog/归档">
-              
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">Artikel</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
+                <div class="site-state-item site-state-posts">
                 
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">Kategorien</span>
+                  <a href="/blog/archives/">
                 
-              </div>
-            
-
-            
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
               
+
               
-              <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">21</span>
-                  <span class="site-state-item-name">Tags</span>
                 
-              </div>
+                <div class="site-state-item site-state-categories">
+                  <a href="/blog/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/blog/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/AscenZ" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zyb428@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
             
-
-          </nav>
-
           
-
-          
-
-          
-          
-
-          
-          
-
           
 
         </div>
@@ -577,25 +729,27 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
 
   
+
+  
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  
 
 
 
-  <span class="post-meta-divider">|</span>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
 
 
 
@@ -604,6 +758,29 @@
 
 
 
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500646422");
+
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66030421";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -620,7 +797,10 @@
     
 
     
+	
+    
 
+    
   </div>
 
   
@@ -639,7 +819,11 @@
 
 
 
-  
+
+
+
+
+
 
 
 
@@ -659,16 +843,6 @@
 
   
   
-    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
     <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
@@ -677,18 +851,13 @@
     <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-  
-  
-    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=6.4.1"></script>
 
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=6.4.1"></script>
 
 
 
@@ -696,38 +865,41 @@
   
 
   
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=6.4.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=6.4.1"></script>
 
 
 
   
 
-
+  
+    <script id="dsq-count-scr" src="https://ascen.disqus.com/count.js" async></script>
   
 
-
-
-
-	
-
-
-
-
-
   
-
-
-
-
-
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://ascen.me/blog/2018/01/01/2017_summary/';
+        this.page.identifier = '2018/01/01/2017_summary/';
+        this.page.title = '2017又结束啦感觉过的挺迷茫的还是总结一下吧';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ascen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
   
 
 
@@ -754,6 +926,12 @@
   
 
   
+
+  
+  
+
+  
+
   
 
   

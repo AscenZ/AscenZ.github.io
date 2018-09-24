@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/stan-touch.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/stan-32x32.png?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/stan-16x16.png?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/blog/images/stan.svg?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="主要组件核心组件就是 场景(Scene)，结点(Node)，精灵(Sprite)，菜单(Menu)，动作(Action) 如图  导演 Director一个游戏只有一个导演，负责控制流程和告诉接收者(recipient)怎么做，想象一下你是一个生产的执行者，告诉导演怎么做导演一个平常的任务就是控制场景的替换和改变，导演在代码里一般是一个单例 这是一个经典的游戏流程 对于游戏来说，我们就是一个导演，">
+<meta name="keywords" content="Cocos2d-x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2d-x_main_element">
+<meta property="og:url" content="http://ascen.me/blog/2016/09/13/cocos2d-x_main_element/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="主要组件核心组件就是 场景(Scene)，结点(Node)，精灵(Sprite)，菜单(Menu)，动作(Action) 如图  导演 Director一个游戏只有一个导演，负责控制流程和告诉接收者(recipient)怎么做，想象一下你是一个生产的执行者，告诉导演怎么做导演一个平常的任务就是控制场景的替换和改变，导演在代码里一般是一个单例 这是一个经典的游戏流程 对于游戏来说，我们就是一个导演，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A44%3A16.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A45%3A19.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A48%3A16.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A48%3A47.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A50%3A41.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A54%3A45.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A55%3A03.jpg">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A55%3A39.jpg">
+<meta property="og:updated_time" content="2018-09-24T12:16:29.255Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cocos2d-x_main_element">
+<meta name="twitter:description" content="主要组件核心组件就是 场景(Scene)，结点(Node)，精灵(Sprite)，菜单(Menu)，动作(Action) 如图  导演 Director一个游戏只有一个导演，负责控制流程和告诉接收者(recipient)怎么做，想象一下你是一个生产的执行者，告诉导演怎么做导演一个平常的任务就是控制场景的替换和改变，导演在代码里一般是一个单例 这是一个经典的游戏流程 对于游戏来说，我们就是一个导演，">
+<meta name="twitter:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A44%3A16.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2016/09/13/cocos2d-x_main_element/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>cocos2d-x_main_element | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/blog/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/blog/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/blog/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/blog/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/blog/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2016/09/13/cocos2d-x_main_element/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/blog/images/stan.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">cocos2d-x_main_element
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-09-13 13:01:02" itemprop="dateCreated datePublished" datetime="2016-09-13T13:01:02+08:00">2016-09-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-24 20:16:29" itemprop="dateModified" datetime="2018-09-24T20:16:29+08:00">2018-09-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/blog/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2016/09/13/cocos2d-x_main_element/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/09/13/cocos2d-x_main_element/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="主要组件"><a href="#主要组件" class="headerlink" title="主要组件"></a>主要组件</h3><p>核心组件就是 场景(Scene)，结点(Node)，精灵(Sprite)，菜单(Menu)，动作(Action)</p>
+<p>如图</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A44%3A16.jpg" alt=""></p>
+<h3 id="导演-Director"><a href="#导演-Director" class="headerlink" title="导演 Director"></a>导演 Director</h3><p>一个游戏只有一个导演，负责控制流程和告诉接收者(recipient)怎么做，想象一下你是一个生产的执行者，告诉导演怎么做<br>导演一个平常的任务就是控制场景的替换和改变，导演在代码里一般是一个单例</p>
+<p>这是一个经典的游戏流程<br><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A45%3A19.jpg" alt=""></p>
+<p>对于游戏来说，我们就是一个导演，负责导演这个游戏</p>
+<h3 id="场景-Scene"><a href="#场景-Scene" class="headerlink" title="场景 Scene"></a>场景 Scene</h3><p>场景是用渲染器(renderer)画出来的，渲染器负责渲染屏幕上的精灵和其他东西</p>
+<h3 id="场景图-Scene-Graph"><a href="#场景图-Scene-Graph" class="headerlink" title="场景图(Scene Graph)"></a>场景图(Scene Graph)</h3><p>场景图是一种用来安排图形场景的数据结构，包含一个结点(Node)，而结点是在场景图形树（数据结构）里面</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A48%3A16.jpg" alt=""></p>
+<p>场景图形是一棵树，那么你可以遍历他，Cocos2d-x用中序遍历算法来遍历树</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A48%3A47.jpg" alt=""></p>
+<p>这里要提到一个z轴的概念(z-order)，每个node都有一个z轴，z轴是用来决定渲染的顺序，值越大越后渲染<br>我们把在场景树左子树的结点（Node）的值设为负数(nagative)，右子树的值为正数(positive)</p>
+<p>场景(Scene）是结点(Node)的一个集合</p>
+<p>在代码中，构建场景图可以用<code>addchild()</code>;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//设置z-order的值为-2，放在左子树</span><br><span class="line">scene-&gt;addChild(title_node, -2);</span><br><span class="line"></span><br><span class="line">//如果不设置值，则默认0</span><br><span class="line">scene-&gt;addChild(label_node);</span><br><span class="line"></span><br><span class="line">//设置值为1，则放在右子树</span><br><span class="line">scene-&gt;addChild(sprite_node, 1);</span><br></pre></td></tr></table></figure>
+<h3 id="精灵-Sprites"><a href="#精灵-Sprites" class="headerlink" title="精灵 Sprites"></a>精灵 Sprites</h3><p>所有游戏都有精灵这种东西，相当于游戏的角色</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A50%3A41.jpg" alt=""></p>
+<p>精灵很容易创建，它们有一些可配置的属性，例如 位置，比例，旋转度，透明度，颜色等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//创建一个精灵</span><br><span class="line">auto mySprite = Sprite::create(“mysprite.png”);</span><br><span class="line"></span><br><span class="line">//改变属性</span><br><span class="line">mySprite-&gt;setPosition(Vec2(500,0));</span><br><span class="line">mySprite-&gt;setRotation(40);</span><br><span class="line">mySprite-&gt;setScale(2.0);</span><br><span class="line">mySprite-&gt;setAnchorPoint(Vec2(0,0));</span><br></pre></td></tr></table></figure>
+<p>设置属性这部分就不说了，很容易理解</p>
+<h3 id="动作-Actions"><a href="#动作-Actions" class="headerlink" title="动作 Actions"></a>动作 Actions</h3><p>创建一个场景，添加了精灵只是其中一部分我们所需要做的，一个游戏要成为游戏，我们要让他动起来！<br>动作允许结点在时间空间上变化，你可以把精灵从一个点移动到另一个点，当完成的时候还可以设置回调<br>你可以创建一系列（Sequence）的动作在一个Node上执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">auto mySprite = Sprite::create(“Blue_Font1.png”);</span><br><span class="line"></span><br><span class="line">//在两秒内 向右移动50像素，向上移动10像素</span><br><span class="line">auto moveBy = MoveBy::create(2, Vec(50,10));</span><br><span class="line">mySprite-&gt;runAction(moveBy);</span><br><span class="line"></span><br><span class="line">//把精灵在两秒内移动到这个位置</span><br><span class="line">auto moveTo = MoveTo::create(2, Vec2(50,10));</span><br><span class="line">mySprite-&gt;runAction(moteTo);</span><br></pre></td></tr></table></figure>
+<h3 id="Sequences-and-Spawns"><a href="#Sequences-and-Spawns" class="headerlink" title="Sequences and Spawns"></a>Sequences and Spawns</h3><p>把一系列（Sequences）动作让一个精灵执行，Cocos2d-x有几种方法</p>
+<p>我们先来看一下，如何用Sequences</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">auto mySprite = Node::create();</span><br><span class="line"></span><br><span class="line">auto moveTo1 = MoveTo::create(2, Vec2(50,10));</span><br><span class="line"></span><br><span class="line">auto moveBy1 = MoveBy::create(2, Vec2(100, 10));</span><br><span class="line"></span><br><span class="line">auto moveTo2 = MoveTo::create(2, Vec2(150, 10));</span><br><span class="line"></span><br><span class="line">//创建一个延迟</span><br><span class="line">auto delay = DelayTime::create(1);</span><br><span class="line"></span><br><span class="line">mySprite-&gt;runAction(Sequence::create(moteTo1, delay, moveBy1, delay.clone(), moveTo2, nullptr));</span><br></pre></td></tr></table></figure>
+<p>这样就能让一个精灵按顺序执行一系列的动作，那如何同时执行呢？<br>那就是Spawn，Spawn可以让所有动作同时执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">auto myNode = Node::create();</span><br><span class="line"></span><br><span class="line">auto moveTo1 = MoveTo::create(2, Vec2(50,10));</span><br><span class="line">auto moveBy1 = MoveBy::create(2, Vec2(100, 10));</span><br><span class="line">auto moveTo2 = MoveTo::create(2, Vec2(150, 10));</span><br><span class="line"></span><br><span class="line">myNode-&gt;runAction(Spawn::create(moveTo1,moveBy1, moveTo2, nullptr));</span><br></pre></td></tr></table></figure>
+<p>当你的角色有大量动作要同时执行的时候便可以这样用</p>
+<h3 id="父子关系-Parent-Child-Relationship"><a href="#父子关系-Parent-Child-Relationship" class="headerlink" title="父子关系 Parent Child Relationship"></a>父子关系 Parent Child Relationship</h3><p>Cocos2d-x用父子关系来描述 属性的改变是父节点对子节点作用的</p>
+<p>下图是一个蓝精灵和它的两个孩子</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A54%3A45.jpg" alt=""></p>
+<p>当父精灵的旋转度改变的时候 子精灵的也会改变</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A55%3A03.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auto myNode = Node::create();</span><br><span class="line"></span><br><span class="line">//旋转</span><br><span class="line">myNode-&gt;setRotation(50);</span><br></pre></td></tr></table></figure>
+<p>当然，如果你改变父精灵的缩放，子精灵的也会改变</p>
+<p><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2016-09-13-15%3A55%3A39.jpg" alt=""></p>
+<h3 id="输出消息-Logging-as-a-way-to-output-messages"><a href="#输出消息-Logging-as-a-way-to-output-messages" class="headerlink" title="输出消息 Logging as a way to output messages"></a>输出消息 Logging as a way to output messages</h3><p>有时候，当你的app运行起来了，你需要看到控制台的输出，可以用log();<br>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//简单的字符串</span><br><span class="line">log(&quot;Thi would be outputted to the console&quot;);</span><br><span class="line"></span><br><span class="line">//字符串和变量</span><br><span class="line">string s = “My variable”;</span><br><span class="line">log(&quot;string s %s&quot;, s);</span><br><span class="line"></span><br><span class="line">double dd = 42;</span><br><span class="line">log(“double is %f”, dd);</span><br><span class="line"></span><br><span class="line">int i = 5;</span><br><span class="line">log(“integer is %d”, i);</span><br><span class="line"></span><br><span class="line">float f = 2.0f;</span><br><span class="line">log(“float is %f”, f);</span><br><span class="line"></span><br><span class="line">bool b = true;</span><br><span class="line">if(b == true)</span><br><span class="line">     log(&quot;bool is true&quot;);</span><br><span class="line">else</span><br><span class="line">     log(“bool is false”);</span><br></pre></td></tr></table></figure>
+<p>当然也可以用c++的std::cout，虽然log()的输出格式更简单操作</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://cocos2d-x.org/docs/cocos2d-x/en/index.html" target="_blank" rel="noopener">Cocos2d-x官方文档</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Cocos2d-x/" rel="tag"># Cocos2d-x</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/07/29/apns_summary/" rel="next" title="APNS原理总结">
+                <i class="fa fa-chevron-left"></i> APNS原理总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/12/31/2016_summary/" rel="prev" title="2016年度总结">
+                2016年度总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/stan.png"
+                alt="Ascen Zhong" />
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description">Ascen的个人博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/blog/archives/">
+                
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/blog/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/blog/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/AscenZ" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zyb428@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要组件"><span class="nav-number">1.</span> <span class="nav-text">主要组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导演-Director"><span class="nav-number">2.</span> <span class="nav-text">导演 Director</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景-Scene"><span class="nav-number">3.</span> <span class="nav-text">场景 Scene</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景图-Scene-Graph"><span class="nav-number">4.</span> <span class="nav-text">场景图(Scene Graph)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精灵-Sprites"><span class="nav-number">5.</span> <span class="nav-text">精灵 Sprites</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动作-Actions"><span class="nav-number">6.</span> <span class="nav-text">动作 Actions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequences-and-Spawns"><span class="nav-number">7.</span> <span class="nav-text">Sequences and Spawns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#父子关系-Parent-Child-Relationship"><span class="nav-number">8.</span> <span class="nav-text">父子关系 Parent Child Relationship</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出消息-Logging-as-a-way-to-output-messages"><span class="nav-number">9.</span> <span class="nav-text">输出消息 Logging as a way to output messages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500646422");
+
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId=66030421";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://ascen.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://ascen.me/blog/2016/09/13/cocos2d-x_main_element/';
+        this.page.identifier = '2016/09/13/cocos2d-x_main_element/';
+        this.page.title = 'cocos2d-x_main_element';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ascen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
