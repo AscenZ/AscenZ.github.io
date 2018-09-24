@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,ReactiveCocoa," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言记得第一个项目用RAC的时候，对MVVM还不理解，通用对RAC也不理解最近项目中一直在用RAC，OC版的（之前叫ReactiveCocoa，现在分离出OC版的ReactiveObjc），也算入门了吧，也终于理解了MVVM现在用的越多，发现RAC一些用法是有些坑的，总结一下 关于Model刚开始学习MVVM的时候，我一直以为一个整体是四部分，Model+View+ViewModel+Contro">
+<meta name="keywords" content="iOS,ReactiveCocoa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RAC的一些坑">
+<meta property="og:url" content="http://ascen.me/blog/2017/04/15/rac_pit/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="前言记得第一个项目用RAC的时候，对MVVM还不理解，通用对RAC也不理解最近项目中一直在用RAC，OC版的（之前叫ReactiveCocoa，现在分离出OC版的ReactiveObjc），也算入门了吧，也终于理解了MVVM现在用的越多，发现RAC一些用法是有些坑的，总结一下 关于Model刚开始学习MVVM的时候，我一直以为一个整体是四部分，Model+View+ViewModel+Contro">
+<meta property="og:updated_time" content="2018-09-24T11:04:59.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RAC的一些坑">
+<meta name="twitter:description" content="前言记得第一个项目用RAC的时候，对MVVM还不理解，通用对RAC也不理解最近项目中一直在用RAC，OC版的（之前叫ReactiveCocoa，现在分离出OC版的ReactiveObjc），也算入门了吧，也终于理解了MVVM现在用的越多，发现RAC一些用法是有些坑的，总结一下 关于Model刚开始学习MVVM的时候，我一直以为一个整体是四部分，Model+View+ViewModel+Contro">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2017/04/15/rac_pit/"/>
+
+
+
+
+
+  <title>RAC的一些坑 | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/首页" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/关于我" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/标签" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/归档" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2017/04/15/rac_pit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">RAC的一些坑</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T20:37:12+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/04/15/rac_pit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/04/15/rac_pit/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>记得第一个项目用RAC的时候，对MVVM还不理解，通用对RAC也不理解<br>最近项目中一直在用RAC，OC版的（之前叫ReactiveCocoa，现在分离出OC版的ReactiveObjc），也算入门了吧，也终于理解了MVVM<br>现在用的越多，发现RAC一些用法是有些坑的，总结一下</p>
+<h3 id="关于Model"><a href="#关于Model" class="headerlink" title="关于Model"></a>关于Model</h3><p>刚开始学习MVVM的时候，我一直以为一个整体是四部分，Model+View+ViewModel+Controller，这里的Model不是指的通用Model（例如User,Orders那些），而是指在MVC中例如TableView中的Model，这个在MVVM中是可选的（即可有可无），我也不清楚有没有一个标准说规定要有或者不能有，我局的如果MVC扩展成MVVM的时候又不想改动太大，那可以保留，如果直接从MVVM开始的话，还是不用写的好</p>
+<p>因为ViewModel的作用完全可以包括了Model的作用，首先我们要明白Controller只是定义View和绑定数据，而数据处理放在ViewModel，而数据我们可以在ViewModel中定义只读的属性(readonly)来提供，所以一个整体的话一般就只有Controller+View(可能直接在Controller里面定义了)+ ViewModel</p>
+<h3 id="关于绑定数据"><a href="#关于绑定数据" class="headerlink" title="关于绑定数据"></a>关于绑定数据</h3><p>其实也不是说用MVVM就一定要要RAC，你可以用KVO啊（如果不嫌麻烦的话），当然RAC底层就是用KVO来实现的，只不过RAC封装的更好用，使用更简便，让你轻轻松松就绑定了数据</p>
+<p>我们先来看看 RAC(…) 和 RACObserve(…) 这两个宏，一般来说我们需要绑定数据的话，例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAC(self.label, text) = RACObserve(self.viewModel, text)</span><br></pre></td></tr></table></figure>
+<p>这样我们就把ViewModel上的text绑定到了一个label上，这是最简单的用法，关于底层那些信号流机制我就不说了，说一下我碰到的一个坑，例如现在有一个输入框，我拿到了信息后要发起请求，发起请求的入口当然是在ViewModel中，所以我们要这样绑定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAC(self.viewModel, text) = self.textField.rac_textSignal;</span><br></pre></td></tr></table></figure>
+<p>这样就绑定好了，然后产品经理给你提了个需求，这是个电话输入框，你在旁边加个通讯录按钮，点完可以进通讯录读取号码显示在输入框上，然后等你写完后你发现数据绑定失效了（当然不是失效了），我们来看看rac_textSignal的实现，其中一句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self rac_signalForControlEvents:UIControlEventAllEditingEvents]</span><br></pre></td></tr></table></figure>
+<p>原来这个信号只监听所有编辑事件，这种从通讯录读取的是 赋值事件，那还要这样写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAC(self.viewModel, text) = RACObserve(self.textField, text)</span><br></pre></td></tr></table></figure>
+<p>刚开始学RAC的时候我以为这两种方式是一样的，但是 RACObserve(…) 是监听这个属性本身，往底层说 应该是监听这个属性的内存地址，其实我们想要的是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAC(self.viewModel, text) = [self.textField.rac_textSignal merge:RACObserve(self.textField, text)]</span><br></pre></td></tr></table></figure>
+<p>然后产品经理说这个界面信息展示太多了还要输入，你弄一个可点击的输入框，一点就跳到另一个界面可以输入名字，电话号码那些信息，也要有通讯录按钮可以拉取名字，还要有历史记录，号码，输入完点确定跳转回来再展示出来就行了，对了，已经有信息的时候点进去 输入框也要默认有信息</p>
+<p>这时候，我们就要开始改这里的绑定数据，已经有信息的时候点进去要输入框要有默认信息，那就这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.textField.text = self.viewModel.text;</span><br><span class="line">RAC(self.viewModel, text) = [self.textField.rac_textSignal merge:RACObserve(self.textField, text)]</span><br></pre></td></tr></table></figure>
+<p>可是还要有历史记录，持久化那只能在ViewModel里面做，那就用双向绑定吧<br>在RAC中双向绑定用 RACChannel ，也有特定的宏，这样写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RACChannelTo(self.viewModel, text) = RACChannelTo(self.textField, text)</span><br></pre></td></tr></table></figure>
+<p>这样从通讯录拉取信息并且绑定到ViewModel的属性上了，但是我们发现输入的时候又绑定不了了，那就按上面的加一句这个？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RACChannelTo(self.viewModel, text) = self.textField.rac_newTextChannel;</span><br></pre></td></tr></table></figure>
+<p>然后发现输入事件绑定好了，但是从通讯录一拉取信息，发现app crash了，看了下线程栈，死循环了</p>
+<p>那应该是 双向绑定了两次导致信号流来回触发监听事件，具体细节可以看这篇文章<br>RAC 中的双向数据绑定 RACChannel</p>
+<p>所以就不能这样实现，双向绑定还有一些其他坑，假如点进去的界面还要输入详细地址，那我们用一个 textView 来做，然后发现 textView 并没有实现 rac_newTextChannel，这就尴尬了</p>
+<p>实质上，RACChannelTo(…) 这个宏得到的是一个 RACChannelTerminal ，这个 RACChannelTerminal 相当于网络连接中的socket，只是一端，而让两个 RACChannelTerminal 则相当于让这两个 RACChannelTerminal相互订阅，那我们可以自定义一个 RACChannelTerminal吗？RAC并不允许你这么做，RACChannelTerminal的初始化方法是私有的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//仅声明在.m文件</span><br><span class="line">- (id)initWithValues:(RACSignal *)values otherTerminal:(id&lt;RACSubscriber&gt;)otherTerminal;</span><br></pre></td></tr></table></figure>
+<p>无奈，我还是放弃使用双向绑定数据了，原来怎么写就怎么写吧</p>
+<h3 id="关于代理"><a href="#关于代理" class="headerlink" title="关于代理"></a>关于代理</h3><p>其实RAC中已经写好取代原生代理的方法了，但是有一个很大的缺点，由于信号流是单向流动的，在订阅后实现你想要实现的代码，但是无法返回值！！也就是说，你无法用RAC写有返回值的代理方法</p>
+<p>现在产品经理叫你在实现的 号码输入框，地址输入框添加键盘事件，return key 上面的变成next，最后的变成 done，点了后要收起键盘</p>
+<p>我们要用到 textField 和 textView 的这个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;</span><br></pre></td></tr></table></figure>
+<p>有返回值，所以就直接写， textView点击done收起键盘，那就这样写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text &#123;</span><br><span class="line">    if([text isEqualToString:@&quot;\n&quot;]) &#123;</span><br><span class="line">        [textView resignFirstResponder];</span><br><span class="line">        return NO;</span><br><span class="line">    &#125;</span><br><span class="line">    return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后设置代理等于self，写上协议</p>
+<p>运行一下，OK，这个功能就实现了<br>但是你发现textView的数据绑定挂了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[self.textView.rac_textSignal subscribeNext:^(id x) &#123;</span><br><span class="line">	NSLog(@&quot;text--%@&quot;,x);</span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+<p>订阅信号发现 信号完全挂了<br>百思不得其解，轮到搜索引擎出场了，Google # RAC textView textSignal<br>然后发现RAC的一条issue<br>rac_textSignal not work on UITextView #1981</p>
+<p>你发现他和你一样是设置了代理后信号就没用了，然后看到这个</p>
+<p>先设置代理就行了吗？！然后你试了一下，发现就是这个问题<br>RAC特么的还管设置代理和绑定数据先后问题！！！为什么 textField 设置在先后都可以，而 textView不行呢！！！好吧，都是RAC的错</p>
+<p>后来我看了一下RAC代理的实现，原来他并不是把Block放到那个方法里面去执行，而是使用 Swizzle来hook那个方法</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>RAC还是很强大的，很多思想值得学习，但是也有一些小坑，总之还有还多东西要学习</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/blog/tags/ReactiveCocoa/" rel="tag"># ReactiveCocoa</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/02/19/restful_api/" rel="next" title="基于RESTful API的设计模式小实践">
+                <i class="fa fa-chevron-left"></i> 基于RESTful API的设计模式小实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/01/01/2017_summary/" rel="prev" title="2017又结束啦感觉过的挺迷茫的还是总结一下吧">
+                2017又结束啦感觉过的挺迷茫的还是总结一下吧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/归档">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于Model"><span class="nav-number">2.</span> <span class="nav-text">关于Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于绑定数据"><span class="nav-number">3.</span> <span class="nav-text">关于绑定数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于代理"><span class="nav-number">4.</span> <span class="nav-text">关于代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

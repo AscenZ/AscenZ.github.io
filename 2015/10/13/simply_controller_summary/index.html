@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,Objective-C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="轻量化ViewControllers顾名思义就是把ViewController的代码进行简化让控制器更简单更清晰 把DataSource和其他protocol分离出控制器因为做项目很多控制器都TableViewController，所以必须要有数据源(TableViewDataSource)输入，一般DataSource的3个方法都在控制器里我们的目的就是要把他分离出来，方法就是自定义一个类，然后">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="轻量化ViewController，读文章做的总结">
+<meta property="og:url" content="http://ascen.me/blog/2015/10/13/simply_controller_summary/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="轻量化ViewControllers顾名思义就是把ViewController的代码进行简化让控制器更简单更清晰 把DataSource和其他protocol分离出控制器因为做项目很多控制器都TableViewController，所以必须要有数据源(TableViewDataSource)输入，一般DataSource的3个方法都在控制器里我们的目的就是要把他分离出来，方法就是自定义一个类，然后">
+<meta property="og:updated_time" content="2018-01-01T15:04:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="轻量化ViewController，读文章做的总结">
+<meta name="twitter:description" content="轻量化ViewControllers顾名思义就是把ViewController的代码进行简化让控制器更简单更清晰 把DataSource和其他protocol分离出控制器因为做项目很多控制器都TableViewController，所以必须要有数据源(TableViewDataSource)输入，一般DataSource的3个方法都在控制器里我们的目的就是要把他分离出来，方法就是自定义一个类，然后">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2015/10/13/simply_controller_summary/"/>
+
+
+
+
+
+  <title>轻量化ViewController，读文章做的总结 | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/首页" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/关于我" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/标签" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/归档" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2015/10/13/simply_controller_summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">轻量化ViewController，读文章做的总结</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-13T22:37:22+08:00">
+                2015-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2015/10/13/simply_controller_summary/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2015/10/13/simply_controller_summary/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>轻量化ViewControllers顾名思义就是把ViewController的代码进行简化让控制器更简单更清晰</p>
+<h3 id="把DataSource和其他protocol分离出控制器"><a href="#把DataSource和其他protocol分离出控制器" class="headerlink" title="把DataSource和其他protocol分离出控制器"></a>把DataSource和其他protocol分离出控制器</h3><p>因为做项目很多控制器都TableViewController，所以必须要有数据源(TableViewDataSource)输入，一般DataSource的3个方法都在控制器里<br>我们的目的就是要把他分离出来，方法就是自定义一个类，然后控制器调用这个类并且这个数据源类是通用的，别的TableViewController或者有定义了tableView/collectionView的控制器都可以调用自定义ArrayDataSource类</p>
+<p>1.定义一个Block，用于传递cell和数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef void (^TableViewCellPassBlock)(id cell, id item);</span><br></pre></td></tr></table></figure>
+<p>2.定义一个方法给控制器调用，用于初始化ArrayDataSource类（需要暴露在.h文件中）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, strong) NSArray *items;</span><br><span class="line">@property (nonatomic, copy) NSString *cellIdentifier;</span><br><span class="line">@property(nonatomic, copy) TableViewCellPassBlock passBlock;</span><br><span class="line">/**</span><br><span class="line"></span><br><span class="line"> *  初始化数据源的方法</span><br><span class="line"> *  @param anItems         用于接受数据的数组</span><br><span class="line"> *  @param aCellIdentifier 接收cell的ID</span><br><span class="line"> *  @param aPassBlock      接收传递的Block</span><br><span class="line"> */</span><br><span class="line"> - (id)initWithItems:(NSArray *)anItems cellIdentifier:(NSString *)aCellIdentifier passBlock(TableViewCellPassBlock)aPassBlock &#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">	if(self)&#123;</span><br><span class="line">		self.items = anItems;</span><br><span class="line">		self.cellIdentifier = aCellIdentifier;</span><br><span class="line">		self.passBlock = [aPassBlock copy];</span><br><span class="line">	&#125;</span><br><span class="line">	return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.然后就是数据源的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/** 这个方法找出数组的数据 后面要用到*/</span><br><span class="line">- (id)itemAtIndexPath:(NSIndexPath *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">	return self.items[(NSUInteger) indexPath.row];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section</span><br><span class="line">&#123;</span><br><span class="line">	return self.items.count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</span><br><span class="line">	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: self.cellIdentifier forIndexPath: indexPath];</span><br><span class="line">	id item = [self itemAtIndexPath: indexPath];</span><br><span class="line">	self.passBlock(cell, item);</span><br><span class="line">	return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ArrayDataSource类就这样定义完成了<br>接下来是控制器的调用<br>只需要写以下几行代码便可以设置tableView的数据源，不用每个控制器都写那三个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//数组传数据是接下来要简化的，后面会详细说明</span><br><span class="line">NSArray *arr = [AppDelegate sharedDelegate].returnModel.returnData;</span><br><span class="line">//使用Block回调，传递cell和模型数据</span><br><span class="line">TableViewCellPassBlock passBlock = ^(TestModelCell *cell,TestModel *model)&#123;</span><br><span class="line">	//测试方法，只是传递model给cell，这个方法用分类写的，自定义cell的分类</span><br><span class="line">	[cell setName: model];</span><br><span class="line">&#125;;</span><br><span class="line">//初始化并设置tableView的数据源</span><br><span class="line">self.dataSource = [[ArrayDataSource alloc] initWithItems: arr cellIdentifier:@&quot;TestModelCell&quot; passBlock: passBlock];</span><br><span class="line">self.tableView.dataSource = self.dataSource;</span><br></pre></td></tr></table></figure>
+<h3 id="二、将业务逻辑放到model中"><a href="#二、将业务逻辑放到model中" class="headerlink" title="二、将业务逻辑放到model中"></a>二、将业务逻辑放到model中</h3><p>一些跟控制器无关的代码可以放到模型中<br>测试代码我写了一个TestModel，只有一个属性和一个初始化方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, copy) NSString *name;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithName:(NSString *)name;</span><br></pre></td></tr></table></figure>
+<p>然后又写了一个model，因为要返回数据所以我叫ReturnModel<br>在.h文件中暴露的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//类方法，创建的时候用这个方法</span><br><span class="line">+ (instancetype)returnModel;</span><br><span class="line"></span><br><span class="line">//这个方法用于返回数据</span><br><span class="line">- (NSArray *)returnData;</span><br></pre></td></tr></table></figure>
+<p>然后在.m文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)returnModel</span><br><span class="line">&#123;</span><br><span class="line">    return [[self alloc] init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (id)init</span><br><span class="line">&#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line">	//调用方法执行业务逻辑的方法</span><br><span class="line">	[self doSomething];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//可以在这个方法中执行与控制器无关的业务逻辑</span><br><span class="line">- (void)doSomething</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;try to do something&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//在这个方法中返回模型数据，数据略</span><br><span class="line"></span><br><span class="line">- (NSArray *)returnData</span><br><span class="line">&#123;</span><br><span class="line">　　NSArray *array = [[NSArray alloc] initWithObject:...];</span><br><span class="line">　　return array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>思路就是在返回数据的模型类中执行业务逻辑，在创建类的时候执行<br>在AppDelegate中添加方法和属性，并且暴露在.h文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">+ (instancetype)sharedDelegate</span><br><span class="line">&#123;</span><br><span class="line">	return [UIApplication sharedApplication].delegate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@synthesize returnModel = _returnModel;</span><br><span class="line"></span><br><span class="line">- (ReturnModel *)returnModel</span><br><span class="line">&#123;</span><br><span class="line">	if (_returnModel == nil) &#123;</span><br><span class="line">		_returnModel = [ReturnModel returnModel];</span><br><span class="line">	&#125;</span><br><span class="line">	return _returnModel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以控制器直接调用方法得到数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NSArray *arr = [AppDelegate sharedDelegate].returnModel.returnData;</span><br></pre></td></tr></table></figure>
+<p>这时候控制器已经很简化了<br>可以把网络请求也放在model层</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://objccn.io/issue-1-1/" target="_blank" rel="noopener">Obj中国的#1</a></p>
+<h3 id="探索"><a href="#探索" class="headerlink" title="探索"></a>探索</h3><p>文中只写了3钟方法，后来我在用的时候要用到其他数据源方法的时候想，为什么不把其他方法也写进去。<br>把数据源完全分离开来。<br>例如 Section的title<br>接口方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (void)setSelectIndexTitle:(NSArray *)selectIndexTitles;</span><br></pre></td></tr></table></figure>
+<p>用一个数据接收便可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)setSectionTitle:(NSArray *)groupTitles</span><br><span class="line">&#123;</span><br><span class="line">	self.groupTitles = groupTitles;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在titleForHeaderInSection中调用即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section</span><br><span class="line">&#123;</span><br><span class="line">	NSString *title = self.groupTitles[section];</span><br><span class="line">	return title;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/blog/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2015/10/27/adhoc/" rel="prev" title="Ad Hoc测试">
+                Ad Hoc测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/归档">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#把DataSource和其他protocol分离出控制器"><span class="nav-number">1.</span> <span class="nav-text">把DataSource和其他protocol分离出控制器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、将业务逻辑放到model中"><span class="nav-number">2.</span> <span class="nav-text">二、将业务逻辑放到model中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索"><span class="nav-number">4.</span> <span class="nav-text">探索</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

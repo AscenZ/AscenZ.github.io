@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="golang," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接口 interface接口就是一个或多个方法的集合，若某个类型的对象实现了所有的方法，那么这个对象就实现了这个接口接口还可以存储值，只要这个类型的对象实现了这个接口，那么这个接口就可以存储这个类型的对象又因为空接口(interface{})没有一个方法，每个类型的对象至少实现了0个或者0个以上的方法，所以空接口能存储任何值 既然接口可以被很多对象实现，那么接口就可以存储很多类型的对象或值，那函数">
+<meta name="keywords" content="golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言中的接口和反射">
+<meta property="og:url" content="http://ascen.me/blog/2017/01/27/go_interface_reflection/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="接口 interface接口就是一个或多个方法的集合，若某个类型的对象实现了所有的方法，那么这个对象就实现了这个接口接口还可以存储值，只要这个类型的对象实现了这个接口，那么这个接口就可以存储这个类型的对象又因为空接口(interface{})没有一个方法，每个类型的对象至少实现了0个或者0个以上的方法，所以空接口能存储任何值 既然接口可以被很多对象实现，那么接口就可以存储很多类型的对象或值，那函数">
+<meta property="og:updated_time" content="2018-08-05T09:34:12.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言中的接口和反射">
+<meta name="twitter:description" content="接口 interface接口就是一个或多个方法的集合，若某个类型的对象实现了所有的方法，那么这个对象就实现了这个接口接口还可以存储值，只要这个类型的对象实现了这个接口，那么这个接口就可以存储这个类型的对象又因为空接口(interface{})没有一个方法，每个类型的对象至少实现了0个或者0个以上的方法，所以空接口能存储任何值 既然接口可以被很多对象实现，那么接口就可以存储很多类型的对象或值，那函数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2017/01/27/go_interface_reflection/"/>
+
+
+
+
+
+  <title>Go语言中的接口和反射 | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/首页" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/关于我" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/标签" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/归档" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2017/01/27/go_interface_reflection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Go语言中的接口和反射</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-27T17:32:59+08:00">
+                2017-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/01/27/go_interface_reflection/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/01/27/go_interface_reflection/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="接口-interface"><a href="#接口-interface" class="headerlink" title="接口 interface"></a>接口 interface</h3><p>接口就是一个或多个方法的集合，若某个类型的对象实现了所有的方法，那么这个对象就实现了这个接口<br>接口还可以存储值，只要这个类型的对象实现了这个接口，那么这个接口就可以存储这个类型的对象<br>又因为空接口(interface{})没有一个方法，每个类型的对象至少实现了0个或者0个以上的方法，所以空接口能存储任何值</p>
+<p>既然接口可以被很多对象实现，那么接口就可以存储很多类型的对象或值，那函数的形参就可以用 接口类型，这样函数就可以接收实现了这个接口的多种类型的对象或值</p>
+<p>那现在有一个以接口为形参的函数，要怎么知道这个接口是什么类型的呢？</p>
+<p>我们可以这样判断，加入函数的形参是一个接口B类型的值b，我们需要知道b是不是A类型的，并且判断A对象是否实现了B接口</p>
+<p>我们可以使用接口中的 .(type) 来判断类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">func test(b B) &#123;</span><br><span class="line">	if a, ok := b.(A); ok &#123;</span><br><span class="line">		fmt.Println(&quot;a实现了接口B&quot;,a)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当前，形参也可以是空接口<br>空接口可以接收任何值，一个小例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var x float32 = 5.3</span><br><span class="line">var i interface&#123;&#125;</span><br><span class="line">i = x</span><br><span class="line">switch i := i.(type) &#123;</span><br><span class="line">case float64:</span><br><span class="line">	fmt.Println(&quot;float64&quot;,i)</span><br><span class="line">case float32:</span><br><span class="line">	fmt.Println(&quot;float32&quot;,i)</span><br><span class="line">default:</span><br><span class="line">	fmt.Println(&quot;who care&quot;,i)</span><br><span class="line">&#125;</span><br><span class="line">//输出 float32 5.3</span><br></pre></td></tr></table></figure>
+<h4 id="内嵌接口"><a href="#内嵌接口" class="headerlink" title="内嵌接口"></a>内嵌接口</h4><p>和结构体中的匿名类型差不多<br>io包中的Writer和Reader</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">type Reader interface &#123;</span><br><span class="line">	Read(p []byte) (n int, err error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Writer interface &#123;</span><br><span class="line">	Write(p []byte) (n int, err error)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ReadWriter 接口结合了 Reader 和 Writer 接口。</span><br><span class="line">type ReadWriter interface &#123;</span><br><span class="line">	Reader</span><br><span class="line">	Writer</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="反射-reflection"><a href="#反射-reflection" class="headerlink" title="反射 reflection"></a>反射 reflection</h3><h4 id="从接口值到反射对象"><a href="#从接口值到反射对象" class="headerlink" title="从接口值到反射对象"></a>从接口值到反射对象</h4><p>类型-值<br>Type Value<br>reflect.TypeOf() 获取的是reflect.Type<br>reflect.ValueOf() 获取的是reflect.Value</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// TypeOf 返回 interface&#123;&#125; 中的值的反射类型Type</span><br><span class="line">func TypeOf(i interface&#123;&#125;) Type</span><br></pre></td></tr></table></figure>
+<p>接收参数的空接口类型（interface{}），因为任何值都有0个或0个以上的方法，可以说都实现了空接口，可以空接口可以接收任何值</p>
+<p>reflect中有一个Kind方法，Kind() 和 TypeOf()都是返回类型，但是又有区别</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">type myInt int</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var x myInt = 5</span><br><span class="line">	a := reflect.ValueOf(x)</span><br><span class="line">	fmt.Println(&quot;Type:&quot;, reflect.TypeOf(x), &quot;Kind:&quot;, a.Kind())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>会输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type: main.myInt Kind: int</span><br></pre></td></tr></table></figure>
+<p>Type能识别自定义的类型，Kind只能识别到底层的类型</p>
+<p>关于结构体的反射对象到值<br>一个简单的例子(取自官方文档）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">type T struct &#123;</span><br><span class="line">    A int</span><br><span class="line">    B string</span><br><span class="line">&#125;</span><br><span class="line">t := T&#123;23, &quot;skidoo&quot;&#125;</span><br><span class="line">s := reflect.ValueOf(&amp;t).Elem()</span><br><span class="line">typeOfT := s.Type()</span><br><span class="line">for i := 0; i &lt; s.NumField(); i++ &#123;</span><br><span class="line">    f := s.Field(i)</span><br><span class="line">    fmt.Printf(&quot;%d: %s %s = %v\n&quot;, i,</span><br><span class="line">        typeOfT.Field(i).Name, f.Type(), f.Interface())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0: A int = 23</span><br><span class="line">1: B string = skidoo</span><br></pre></td></tr></table></figure>
+<h4 id="从反射对象到接口值"><a href="#从反射对象到接口值" class="headerlink" title="从反射对象到接口值"></a>从反射对象到接口值</h4><p>给了一个 reflect.Value</p>
+<p>有一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func (v Value) Interface() interface&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x int = 5</span><br><span class="line">a := reflect.ValueOf(x)</span><br><span class="line">fmt.Println(a.Interface())</span><br></pre></td></tr></table></figure>
+<p>要修改反射对象，其值必须可设置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var x float64 = 5.4</span><br><span class="line">a := reflect.ValueOf(x)</span><br><span class="line">a.SetFloat(5.4)</span><br></pre></td></tr></table></figure>
+<p>调用SetFloat()之后会报panic</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">panic: reflect: reflect.Value.SetFloat using unaddressable value</span><br></pre></td></tr></table></figure>
+<p>无论是想改x，还是x的副本a 这样都无法修改<br>但是如果想修改x，可以这样</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var x float64 = 5.4</span><br><span class="line">//取x的引用</span><br><span class="line">a := reflect.ValueOf(&amp;x)</span><br><span class="line">c := a.Elem()</span><br><span class="line">//这时候c是可以调用`setFloat()`的，它的canSet()是true</span><br><span class="line">c.setFloat(11.1)</span><br><span class="line">fmt.Println(&quot;c:&quot;, c, &quot;x:&quot;, x)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c: 11.1 x: 11.1</span><br></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.jb51.net/article/56812.htm" target="_blank" rel="noopener">Go语言interface详解</a><br><a href="https://blog.go-zh.org/laws-of-reflection" target="_blank" rel="noopener">反射三法则 - Go博客</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/golang/" rel="tag"># golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/01/08/cpp_raii_smart_ptr/" rel="next" title="C++ RAII与智能指针">
+                <i class="fa fa-chevron-left"></i> C++ RAII与智能指针
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/02/19/restful_api/" rel="prev" title="基于RESTful API的设计模式小实践">
+                基于RESTful API的设计模式小实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/归档">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#接口-interface"><span class="nav-number">1.</span> <span class="nav-text">接口 interface</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内嵌接口"><span class="nav-number">1.1.</span> <span class="nav-text">内嵌接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射-reflection"><span class="nav-number">2.</span> <span class="nav-text">反射 reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从接口值到反射对象"><span class="nav-number">2.1.</span> <span class="nav-text">从接口值到反射对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从反射对象到接口值"><span class="nav-number">2.2.</span> <span class="nav-text">从反射对象到接口值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

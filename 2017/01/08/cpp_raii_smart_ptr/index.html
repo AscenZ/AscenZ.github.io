@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是RAII资源获取即初始化 (Resource Acquisition Is Initialization, RAII)，RAII是一种资源管理机制，资源的有效期与持有资源的对象生命期严格绑定，即由对象的构造函数完成资源的分配，由析构函数完成资源的释放，总结一句话就是 用对象来管理资源 RAII实现原理当一个对象离开作用域的时候就会被释放，会调用这个对象类的析构函数，这都是自动管理的，不需要我">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ RAII与智能指针">
+<meta property="og:url" content="http://ascen.me/blog/2017/01/08/cpp_raii_smart_ptr/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="什么是RAII资源获取即初始化 (Resource Acquisition Is Initialization, RAII)，RAII是一种资源管理机制，资源的有效期与持有资源的对象生命期严格绑定，即由对象的构造函数完成资源的分配，由析构函数完成资源的释放，总结一句话就是 用对象来管理资源 RAII实现原理当一个对象离开作用域的时候就会被释放，会调用这个对象类的析构函数，这都是自动管理的，不需要我">
+<meta property="og:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2017-01-06-214110.jpg">
+<meta property="og:updated_time" content="2018-08-05T08:57:59.564Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ RAII与智能指针">
+<meta name="twitter:description" content="什么是RAII资源获取即初始化 (Resource Acquisition Is Initialization, RAII)，RAII是一种资源管理机制，资源的有效期与持有资源的对象生命期严格绑定，即由对象的构造函数完成资源的分配，由析构函数完成资源的释放，总结一句话就是 用对象来管理资源 RAII实现原理当一个对象离开作用域的时候就会被释放，会调用这个对象类的析构函数，这都是自动管理的，不需要我">
+<meta name="twitter:image" content="http://7xsnb0.com1.z0.glb.clouddn.com/2017-01-06-214110.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2017/01/08/cpp_raii_smart_ptr/"/>
+
+
+
+
+
+  <title>C++ RAII与智能指针 | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/首页" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/关于我" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/标签" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/归档" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2017/01/08/cpp_raii_smart_ptr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">C++ RAII与智能指针</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-08T16:11:47+08:00">
+                2017-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2017/01/08/cpp_raii_smart_ptr/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2017/01/08/cpp_raii_smart_ptr/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是RAII"><a href="#什么是RAII" class="headerlink" title="什么是RAII"></a>什么是RAII</h3><p>资源获取即初始化 (Resource Acquisition Is Initialization, RAII)，RAII是一种资源管理机制，资源的有效期与持有资源的对象生命期严格绑定，即由对象的构造函数完成资源的分配，由析构函数完成资源的释放，总结一句话就是 用对象来管理资源</p>
+<h3 id="RAII实现原理"><a href="#RAII实现原理" class="headerlink" title="RAII实现原理"></a>RAII实现原理</h3><p>当一个对象离开作用域的时候就会被释放，会调用这个对象类的析构函数，这都是自动管理的，不需要我们手动调用。所以我们可以把资源封装到类的内部，当需要用资源的时候初始化对象即可，当对象被释放的时候资源也会被释放</p>
+<p>看一个小例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">class ArrayOperation</span><br><span class="line">&#123;</span><br><span class="line">public :</span><br><span class="line">    ArrayOperation()</span><br><span class="line">    &#123;</span><br><span class="line">        m_Array = new int [10];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void InitArray()</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 0; i &lt; 10; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            *(m_Array + i) = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void ShowArray()</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 0; i &lt;10; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;m_Array[i]&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ~ArrayOperation()</span><br><span class="line">    &#123;</span><br><span class="line">        cout&lt;&lt; &quot;~ArrayOperation is called&quot; &lt;&lt;endl;</span><br><span class="line">        if (m_Array != NULL )</span><br><span class="line">        &#123;</span><br><span class="line">            delete[] m_Array;</span><br><span class="line">            m_Array = NULL ;</span><br><span class="line">            cout &lt;&lt; &quot;m_Array is released&quot; &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">private :</span><br><span class="line">    int *m_Array;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">void test()&#123;</span><br><span class="line">    ArrayOperation arrayOp;</span><br><span class="line">    arrayOp.InitArray();</span><br><span class="line">    arrayOp.ShowArray();</span><br><span class="line">    cout &lt;&lt; &quot;test end&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    test();</span><br><span class="line">    cout &lt;&lt; &quot;return 0&quot; &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下<br><img src="http://7xsnb0.com1.z0.glb.clouddn.com/2017-01-06-214110.jpg" alt="ascen.me_cpp_raii"></p>
+<p>可以看到在test函数结束之后会释放对象arrayOp，然后会调用ArrayOperation的析构函数，会释放掉指针</p>
+<p>简单说明一下，创建arrayOp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayOperation arrayOp;</span><br><span class="line">//相当于 ArrayOperation arrayOp = ArrayOperation();</span><br><span class="line">//隐式、显示调用的区别</span><br></pre></td></tr></table></figure>
+<p>是在栈中分配内存，如果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ArrayOperation* arrayOp = new ArrayOperation();</span><br></pre></td></tr></table></figure>
+<p>则是在堆中分配内存，如果不</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete arrayOp;</span><br></pre></td></tr></table></figure>
+<p>则不会调用析构函数</p>
+<h3 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h3><h4 id="auto-ptr"><a href="#auto-ptr" class="headerlink" title="auto_ptr"></a>auto_ptr</h4><p>auto_ptr的特性就是在栈上构建对象，在离开作用范围时会自动析构</p>
+<p>上面的例子可以改成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void test()&#123;</span><br><span class="line">	auto_ptr&lt;ArrayOperation&gt; arrayOp(new ArrayOperation);</span><br><span class="line">	//相当于auto_ptr&lt;ArrayOperation&gt; arrayOp(new ArrayOperation());</span><br><span class="line">	arrayOp-&gt;InitArray();</span><br><span class="line">	arrayOp-&gt;ShowArray();</span><br><span class="line">	cout &lt;&lt; &quot;test end&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的话不需要 delete arrayOp 也会调用析构函数来释放资源</p>
+<p>auto_ptr有一个问题，就是被销毁时会自动删除它指向的对象，所以不能让多个auto_ptr指向同一个对象。如果有多个auto_ptr指针指向同一个对象的话便会多次删除对象。</p>
+<p>但是若通过copy构造函数或者 copy assignment 操作符复制它们，它们就会变成null，而复制所得的指针将取得资源的唯一控制权(所有权），注意，是拷贝初始化，或者拷贝赋值才会这样，即发生了拷贝行为即原指针会变为null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int*p=new int(0);</span><br><span class="line">auto_ptr&lt;int&gt;ap1(p);</span><br><span class="line">auto_ptr&lt;int&gt;ap2(p);</span><br></pre></td></tr></table></figure>
+<p>这样ap1、ap2都指向p所指之物，危险行为，会删除p两次。</p>
+<p>如果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int*p=new int(0);</span><br><span class="line">auto_ptr&lt;int&gt;ap1(p);</span><br><span class="line">auto_ptr&lt;int&gt;ap2 = ap1;</span><br><span class="line">//或者 auto_ptr&lt;int&gt; ap2(ap1);</span><br></pre></td></tr></table></figure>
+<p>ap2是拷贝初始化，ap1会变为null，ap2指向p所指之物</p>
+<p>而且因为auto_ptr的析构函数中删除指针用的是delete,而不是delete [],所以我们不应该用auto_ptr来管理一个数组指针！！</p>
+<h4 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h4><p>share_ptr也是一种智能指针，自动管理对象的释放，并且可以让多个指针指向同一个对象，会有一个iOS ARC中的“引用计数”来记录这个对象被多少指针所引用，如果这个对象的引用计数变为0，则被会自动释放空间</p>
+<p>shared_ptr跟auto_ptr一样自动管理对象的释放，并且没有auto_ptr的那些缺点，因为使用了“引用计数”，但是这样也产生了新的问题，那就是循环引用、自引用等问题</p>
+<h4 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a>weak_ptr</h4><p>由于shared_ptr有了循环引用等问题，于是就有了weak_ptr这种弱引用的指针，不增加引用计数</p>
+<p>这里和iOS Property中的机制差不多，很多地方的实现思想都是相似的</p>
+<h4 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h4><p>unique_ptr是只能有一个unique_ptr指向一个对象，因此unique_ptr不支持拷贝和赋值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;string&gt; p1(new string(&quot;test&quot;));</span><br><span class="line">unique_ptr&lt;string&gt; p2(p1); //拷贝，错误</span><br><span class="line">unique_ptr&lt;string&gt; p3;</span><br><span class="line">p3 = p2;	//赋值，错误</span><br></pre></td></tr></table></figure>
+<p>不能拷贝或者赋值，但是可以通过 release 或 reset来转换指针的所有权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unique_ptr&lt;string&gt; p2(p1.release); //release将p1置空</span><br><span class="line">unique_ptr&lt;string&gt; p3(new string(&quot;test&quot;));</span><br><span class="line">p2.reset(p3.release);	//reset释放了p2原来指向的内存</span><br></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>C++中的RAII机制<br>Effective C++ 第13条款<br>C++ Primer</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/01/06/process_thread_multithread/" rel="next" title="进程、线程理解及多线程">
+                <i class="fa fa-chevron-left"></i> 进程、线程理解及多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/01/27/go_interface_reflection/" rel="prev" title="Go语言中的接口和反射">
+                Go语言中的接口和反射 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/归档">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是RAII"><span class="nav-number">1.</span> <span class="nav-text">什么是RAII</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAII实现原理"><span class="nav-number">2.</span> <span class="nav-text">RAII实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#智能指针"><span class="nav-number">3.</span> <span class="nav-text">智能指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#auto-ptr"><span class="nav-number">3.1.</span> <span class="nav-text">auto_ptr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shared-ptr"><span class="nav-number">3.2.</span> <span class="nav-text">shared_ptr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#weak-ptr"><span class="nav-number">3.3.</span> <span class="nav-text">weak_ptr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unique-ptr"><span class="nav-number">3.4.</span> <span class="nav-text">unique_ptr</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

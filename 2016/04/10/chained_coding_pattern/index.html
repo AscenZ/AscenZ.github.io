@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,Objective-C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="链式编程是什么链式编程就是将调用多个方法用点语法连接起来，让代码更加简洁和可读性更高刚开始接触链式编程是Masonry，用起来真的非常爽 1make.left.right.top.equalTo(self.view); 这样一句语句就调用了4个方法  .left调用了left属性的get方法 .right, .top调用了right和top方法 .equalTo()调用了equalTo方法  这种">
+<meta name="keywords" content="iOS,Objective-C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链式编程思想">
+<meta property="og:url" content="http://ascen.me/blog/2016/04/10/chained_coding_pattern/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="链式编程是什么链式编程就是将调用多个方法用点语法连接起来，让代码更加简洁和可读性更高刚开始接触链式编程是Masonry，用起来真的非常爽 1make.left.right.top.equalTo(self.view); 这样一句语句就调用了4个方法  .left调用了left属性的get方法 .right, .top调用了right和top方法 .equalTo()调用了equalTo方法  这种">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/chian-1.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/chian-2.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/chian-3.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/chian-4.png">
+<meta property="og:updated_time" content="2018-01-01T16:22:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="链式编程思想">
+<meta name="twitter:description" content="链式编程是什么链式编程就是将调用多个方法用点语法连接起来，让代码更加简洁和可读性更高刚开始接触链式编程是Masonry，用起来真的非常爽 1make.left.right.top.equalTo(self.view); 这样一句语句就调用了4个方法  .left调用了left属性的get方法 .right, .top调用了right和top方法 .equalTo()调用了equalTo方法  这种">
+<meta name="twitter:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/chian-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2016/04/10/chained_coding_pattern/"/>
+
+
+
+
+
+  <title>链式编程思想 | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/首页" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/关于我" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/标签" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/归档" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2016/04/10/chained_coding_pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">链式编程思想</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-10T00:17:31+08:00">
+                2016-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2016/04/10/chained_coding_pattern/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2016/04/10/chained_coding_pattern/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="链式编程是什么"><a href="#链式编程是什么" class="headerlink" title="链式编程是什么"></a>链式编程是什么</h3><p>链式编程就是将调用多个方法用点语法连接起来，让代码更加简洁和可读性更高<br>刚开始接触链式编程是Masonry，用起来真的非常爽</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make.left.right.top.equalTo(self.view);</span><br></pre></td></tr></table></figure>
+<p>这样一句语句就调用了4个方法</p>
+<ul>
+<li>.left调用了left属性的get方法</li>
+<li>.right, .top调用了right和top方法</li>
+<li>.equalTo()调用了equalTo方法</li>
+</ul>
+<p>这种写法极大简化了写约束的方式</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>原理就是调用的属性的类型或者方法的返回类型为原调用属性的类型<br>例如说UILabel调用了某个方法或者属性，得到的类型还是UILabel，那么还可以继续调用UILabel的属性或者方法</p>
+<h3 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h3><p>看了Masonry，我发现有两种实现方式</p>
+<h4 id="1-用点语法调用方法"><a href="#1-用点语法调用方法" class="headerlink" title="1.用点语法调用方法"></a>1.用点语法调用方法</h4><p>这个其实我之前没发现，写习惯了用方括号调用方法<br>例如创建一个label 可以这样写UILabel <em>label = [[UILabel alloc] init<br>其实也可以这样写UILabel </em>label = UILabel.alloc.init<br>不过后种方法几乎没人用，苹果应该也不推荐这种写法，因为有时候这样写是没有代码提示的<br>但是有一个缺点就是不能调用有参数的方法，所以我们只能写没有参数的方法</p>
+<p>创建一个UIButton的分类<br>写两个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">- (UIButton *)setTextHello;</span><br><span class="line">- (UIButton *)setTextColorRed;</span><br></pre></td></tr></table></figure>
+<p>并且实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (UIButton *)setTextColorRed</span><br><span class="line">&#123;</span><br><span class="line">    [self setTitleColor:[UIColor redColor] forState:UIControlStateNormal];</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UIButton *)setImage</span><br><span class="line">&#123;</span><br><span class="line">    [self setImage:[UIImage imageNamed:@&quot;Stan1&quot;] forState:UIControlStateNormal];</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们创建一个按钮的时候就可以这样写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//创建一个按钮</span><br><span class="line">UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];</span><br><span class="line">button.frame = CGRectMake(100, 100, 100, 100);</span><br><span class="line">button.setTextHello.setTextColorRed;</span><br><span class="line">[self.view addSubview:button];</span><br></pre></td></tr></table></figure>
+<p>效果如图</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/chian-1.png" alt="chian-1"></p>
+<p>但是会报一个警告，因为调用的是属性，但是这个属性没有被用到<br>解决方法是在调用属性前面加(void),这样就可以了</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/chian-2.png" alt="chian-2"></p>
+<h4 id="2-用属性调用"><a href="#2-用属性调用" class="headerlink" title="2.用属性调用"></a>2.用属性调用</h4><p>新创建一个UILabel的分类<br>如果要传入参数的话，就返回一个UILabel的block，可以在block里面实现你想要实现的东西</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic,copy) UILabel* (^kText)(NSString *text);</span><br><span class="line">@property(nonatomic,copy) UILabel* (^kFont)(NSUInteger fontSize);</span><br><span class="line">@property(nonatomic,copy) UILabel* (^kTextColor)(UIColor *color);</span><br></pre></td></tr></table></figure>
+<p>加k是为了易于区分，可以不加的<br>因为这是在分类里面的属性，不会生成setter和getter方法，所以都要自己写<br>实现如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">- (UILabel *(^)(NSUInteger))kFont</span><br><span class="line">&#123;</span><br><span class="line">    return ^(NSUInteger font)&#123;</span><br><span class="line">        [self setFont:[UIFont systemFontOfSize:font]];</span><br><span class="line">        return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UILabel *(^)(NSString *))kText</span><br><span class="line">&#123;</span><br><span class="line">    return ^(NSString *text)&#123;</span><br><span class="line">        [self setText:text];</span><br><span class="line">        return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UILabel *(^)(UIColor *))kTextColor</span><br><span class="line">&#123;</span><br><span class="line">    return ^(UIColor *color)&#123;</span><br><span class="line">        [self setTextColor:color];</span><br><span class="line">        return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setKFont:(UILabel *(^)(NSUInteger))kFont&#123;&#125;</span><br><span class="line">- (void)setKText:(UILabel *(^)(NSString *))kText&#123;&#125;</span><br><span class="line">- (void)setKTextColor:(UILabel *(^)(UIColor *))kTextColor&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>不会用到setter方法，也不能用，所以setter方法设为空<br>然后就能愉快的链式编程了</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/chian-3.png" alt="chian-3"></p>
+<p>然后我再想，假如没有参数呢，刚开始是想block没有参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic,copy) UILabel* (^aText)();</span><br><span class="line">@property(nonatomic,copy) UILabel* (^aFont)();</span><br><span class="line">@property(nonatomic,copy) UILabel* (^aTextColor)();</span><br></pre></td></tr></table></figure>
+<p>实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">- (UILabel *(^)())aFont</span><br><span class="line">&#123;</span><br><span class="line">    return ^()&#123;</span><br><span class="line">        [self setFont:[UIFont systemFontOfSize:16.0f]];</span><br><span class="line">        return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UILabel *(^)())aTextColor</span><br><span class="line">&#123;</span><br><span class="line">    return ^()&#123;</span><br><span class="line">        [self setTextColor:[UIColor cyanColor]];</span><br><span class="line">        return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UILabel *(^)())aText</span><br><span class="line">&#123;</span><br><span class="line">    return ^()&#123;</span><br><span class="line">        [self setText:@&quot;这还是一个label&quot;];</span><br><span class="line">        return self;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setAFont:(UILabel *(^)())aFont&#123;&#125;</span><br><span class="line">- (void)setAText:(UILabel *(^)())aText&#123;&#125;</span><br><span class="line">- (void)setATextColor:(UILabel *(^)())aTextColor&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>后来发现调用的时候还是要这样<br><img src="http://7xsnb0.com2.z0.glb.clouddn.com/chian-4.png" alt="chian-4"></p>
+<p>尝试了一下，最后一个调用能去掉括号，报警告，能运行，但是没效果</p>
+<p>所以我想为什么不直接调用属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic,strong) UILabel *bText;</span><br><span class="line">@property(nonatomic,strong) UILabel *bFont;</span><br><span class="line">@property(nonatomic,strong) UILabel *bTextColor;</span><br></pre></td></tr></table></figure>
+<p>getter &amp;&amp; setter</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (UILabel *)bText</span><br><span class="line">&#123;</span><br><span class="line">    [self setText:@&quot;labellabel&quot;];</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UILabel *)bTextColor</span><br><span class="line">&#123;</span><br><span class="line">    [self setTextColor:[UIColor purpleColor]];</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (UILabel *)bFont</span><br><span class="line">&#123;</span><br><span class="line">    [self setFont:[UIFont systemFontOfSize:13.0f]];</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)setBFont:(UILabel *)bFont&#123;&#125;</span><br><span class="line">- (void)setBText:(UILabel *)bText&#123;&#125;</span><br><span class="line">- (void)setBTextColor:(UILabel *)bTextColor&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(100, 400, 200, 100)];</span><br><span class="line">(void)label3.bTextColor.bText.bFont;</span><br><span class="line">[self.view addSubview:label3];</span><br></pre></td></tr></table></figure>
+<p>如果调用不加(void)还是会报警告<br>如果想像Masonry那样的链式编程可以这样写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(100, 400, 200, 100)];</span><br><span class="line">label3.bTextColor.bText.kFont(30);</span><br><span class="line">[self.view addSubview:label3];</span><br></pre></td></tr></table></figure>
+<p>这样就不会报警告,整洁清晰</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/blog/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/03/10/sdwebimage_reading_note/" rel="next" title="读SDWebImage笔记">
+                <i class="fa fa-chevron-left"></i> 读SDWebImage笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/04/15/a_project_report/" rel="prev" title="一个项目总结">
+                一个项目总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/归档">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链式编程是什么"><span class="nav-number">1.</span> <span class="nav-text">链式编程是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何实现"><span class="nav-number">3.</span> <span class="nav-text">如何实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-用点语法调用方法"><span class="nav-number">3.1.</span> <span class="nav-text">1.用点语法调用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-用属性调用"><span class="nav-number">3.2.</span> <span class="nav-text">2.用属性调用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

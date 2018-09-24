@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Objective-C,XMPP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="搭建服务器和数据库搭载服务器我用的是openfire，数据库用的是mysql 这里推荐两篇文章 配置mysql，用的是mysql workbench http://justsee.iteye.com/blog/1753467 配置服务器 Openfire http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html 先配置好数据库然后">
+<meta name="keywords" content="Objective-C,XMPP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xmpp_simple_im">
+<meta property="og:url" content="http://ascen.me/blog/2016/03/10/xmpp_simple_im/index.html">
+<meta property="og:site_name" content="Ascen的羽毛">
+<meta property="og:description" content="搭建服务器和数据库搭载服务器我用的是openfire，数据库用的是mysql 这里推荐两篇文章 配置mysql，用的是mysql workbench http://justsee.iteye.com/blog/1753467 配置服务器 Openfire http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html 先配置好数据库然后">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-1.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-2.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-3.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-4.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-5.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-6.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-7.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-8.png">
+<meta property="og:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-9.png">
+<meta property="og:updated_time" content="2018-01-01T16:23:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xmpp_simple_im">
+<meta name="twitter:description" content="搭建服务器和数据库搭载服务器我用的是openfire，数据库用的是mysql 这里推荐两篇文章 配置mysql，用的是mysql workbench http://justsee.iteye.com/blog/1753467 配置服务器 Openfire http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html 先配置好数据库然后">
+<meta name="twitter:image" content="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ascen.me/blog/2016/03/10/xmpp_simple_im/"/>
+
+
+
+
+
+  <title>xmpp_simple_im | Ascen的羽毛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ascen的羽毛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/首页" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/关于我" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/标签" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/归档" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/blog/blog/2016/03/10/xmpp_simple_im/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ascen的羽毛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">xmpp_simple_im</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-10T20:01:05+08:00">
+                2016-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2016/03/10/xmpp_simple_im/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2016/03/10/xmpp_simple_im/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="搭建服务器和数据库"><a href="#搭建服务器和数据库" class="headerlink" title="搭建服务器和数据库"></a>搭建服务器和数据库</h3><p>搭载服务器我用的是openfire，数据库用的是mysql</p>
+<p>这里推荐两篇文章</p>
+<p>配置mysql，用的是<code>mysql workbench</code></p>
+<p><a href="http://justsee.iteye.com/blog/1753467" target="_blank" rel="noopener">http://justsee.iteye.com/blog/1753467</a></p>
+<p>配置服务器 <code>Openfire</code></p>
+<p><a href="http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html" target="_blank" rel="noopener">http://www.cnblogs.com/xiaodao/archive/2013/04/05/3000554.html</a></p>
+<p>先配置好数据库然后配置服务器<br>然后两个都打开</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-1.png" alt="xmpp-1"></p>
+<p>数据库也打开</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-2.png" alt="xmpp-2"></p>
+<p>下一个XMPP客户端，就是用来测试的<br>我下的是Adium</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-3.png" alt="Adium"></p>
+<p><a href="https://xmpp.org/software/clients.html" target="_blank" rel="noopener">这里下</a></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>然后在Adium里面添加帐号，服务器要用openfire设置好的127.0.0.1，端口用5222</p>
+<p>这里openfire里面的服务器端口，5222是客户端连接服务器</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-4.png" alt="server"></p>
+<p>登录成功后可以在openfire里面看到用户已经在线</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-5.png" alt="online"></p>
+<p>然后另一客户端，我直接用代码，觉得麻烦没做界面</p>
+<p>简单实现<br>设置XMPPStream</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (XMPPStream *)stream</span><br><span class="line">&#123;</span><br><span class="line">    if (!_stream) &#123;</span><br><span class="line">        _stream = [[XMPPStream alloc] init];</span><br><span class="line">        [_stream addDelegate:self delegateQueue:dispatch_get_current_queue()];</span><br><span class="line">    &#125;</span><br><span class="line">    return _stream;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后设置帐号，只是测试，所以直接在viewDidLoad里面写了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    [self.stream setMyJID:[XMPPJID jidWithString:@&quot;test123@127.0.0.1&quot;]];</span><br><span class="line">    [self.stream setHostName:@&quot;127.0.0.1&quot;];</span><br><span class="line">    [self.stream setHostPort:5222];</span><br><span class="line">    </span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    [self.stream connectWithTimeout:1.0f error:&amp;error];</span><br><span class="line">    </span><br><span class="line">    if (error) &#123;</span><br><span class="line">        NSLog(@&quot;connectWithTimeout : %@&quot;,error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后就是验证密码，下面的方法是上线，这些是代理方法，记得设置XMPPStream的代理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- (void)xmppStreamDidConnect:(XMPPStream *)sender</span><br><span class="line">&#123;</span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    [self.stream authenticateWithPassword:@&quot;test123&quot; error:&amp;error];</span><br><span class="line">    if (error) &#123;</span><br><span class="line">        NSLog(@&quot;authenticateWithPassword : %@&quot;,error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (void)xmppStreamDidAuthenticate:(XMPPStream *)sender</span><br><span class="line">&#123;</span><br><span class="line">    XMPPPresence *presence = [XMPPPresence presence];</span><br><span class="line">    [self.stream sendElement:presence];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是接受信息的方法，我没做界面，直接打印出来接受的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message</span><br><span class="line">&#123;</span><br><span class="line">    NSString *msg = [[message elementsForName:@&quot;body&quot;] lastObject];</span><br><span class="line">    NSLog(@&quot;%@&quot;,msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果验证失败的话，会调用这个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(DDXMLElement *)error</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;didNotAuthenticate : %@&quot;,error);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后来在openfire查看用户名必须带 服务器名</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-6.png" alt="serverlist"></p>
+<p>例如我的帐号是test123，设置JID的用户名就是<code>test123@127.0.0.1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[self.stream setMyJID:[XMPPJID jidWithString:@&quot;test123@127.0.0.1&quot;]];</span><br></pre></td></tr></table></figure>
+<p>然后运行，没有报错，在openfire显示已经在线</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-7.png" alt="online2"></p>
+<p>然后就可以开始聊天了，下面的是刚发的，上面的是之前的聊天记录</p>
+<p>发了文字和一个链接</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-8.png" alt="chat"></p>
+<p>然后Xcode输出</p>
+<p><img src="http://7xsnb0.com2.z0.glb.clouddn.com/xmpp-9.png" alt=""></p>
+<p>即时通讯最简单的就这样，退出APP后openfire后台就会显示下线</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Objective-C/" rel="tag"># Objective-C</a>
+          
+            <a href="/blog/tags/XMPP/" rel="tag"># XMPP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2015/10/27/adhoc/" rel="next" title="Ad Hoc测试">
+                <i class="fa fa-chevron-left"></i> Ad Hoc测试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/03/10/sdwebimage_reading_note/" rel="prev" title="读SDWebImage笔记">
+                读SDWebImage笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Ascen Zhong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/归档">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建服务器和数据库"><span class="nav-number">1.</span> <span class="nav-text">搭建服务器和数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ascen Zhong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
