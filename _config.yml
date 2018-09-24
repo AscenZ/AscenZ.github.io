@@ -85,4 +85,4 @@ deploy:
 backup:
     type: git
     repository:
-       github: git@github.com:AscenZ/AscenZ.github.io.git, backup
+       github: git@github.com:AscenZ/AscenZ.github.io.git,backup
