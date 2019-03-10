@@ -478,7 +478,7 @@ pangu: false
 
 # Disqus
 disqus:
-  enable: true
+  enable: false
   shortname: ascen
   count: true
   lazyload: false
