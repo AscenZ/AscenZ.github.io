@@ -17,9 +17,23 @@
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -42,25 +56,21 @@
 
 
 
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/stan-touch.png?v=6.4.1">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/stan-32x32.png?v=6.4.1">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/stan-touch.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/stan-16x16.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/stan-32x32.png?v=7.0.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/stan-16x16.png?v=7.0.1">
-
-
-  <link rel="mask-icon" href="/images/stan.svg?v=7.0.1" color="#222">
+  <link rel="mask-icon" href="/images/stan.svg?v=6.4.1" color="#222">
 
 
 
@@ -68,15 +78,15 @@
 
 
 
-<script id="hexo.configurations">
+
+
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '7.0.1',
+    version: '6.4.1',
     sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    back2top: ,
-    back2top_sidebar: ,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -118,7 +128,7 @@
 
 
 
-<script id="page.configurations">
+<script type="text/javascript" id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -135,31 +145,30 @@
 
 
 
-
-
-
   <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
   </style>
 </noscript>
 
@@ -178,7 +187,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
+  <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
@@ -188,7 +197,6 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
     
   </div>
 
@@ -212,85 +220,40 @@
         
           
           <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
-
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
-
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
-
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
-
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
-
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
   </li>
 
       
@@ -341,16 +304,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/12/31/2016_summary/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/12/31/2016_summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -360,8 +323,9 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/12/31/2016_summary/" class="post-title-link" itemprop="url">2016年度总结</a>
+                <a class="post-title-link" href="/2016/12/31/2016_summary/" itemprop="url">
+                  2016年度总结
+                </a>
               
             
           </h2>
@@ -396,20 +360,6 @@
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/12/31/2016_summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/12/31/2016_summary/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -436,13 +386,15 @@
       
         
           
-            <p>
-              回顾20162016是有点蛋疼的一年
+          回顾20162016是有点蛋疼的一年
 关于项目2016是大三下学期到大四上学期。刚开始差不多一月多开始的项目“初恋”，由于过年拖了一段时间，然后3月回学校就全力开始开发。中途项目由MVC转向MVVM，也拖了一下我的进度，学习MVVM的一些机制和学习函数式编程。但是有了初步的了解之后就觉得MVVM比M
-              ...
-            </p>
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/31/2016_summary/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -456,9 +408,6 @@
 
     
 
-    
-      
-    
     
 
     
@@ -498,16 +447,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/09/13/cocos2d-x_main_element/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/09/13/cocos2d-x_main_element/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -517,8 +466,9 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/09/13/cocos2d-x_main_element/" class="post-title-link" itemprop="url">cocos2d-x_main_element</a>
+                <a class="post-title-link" href="/2016/09/13/cocos2d-x_main_element/" itemprop="url">
+                  cocos2d-x_main_element
+                </a>
               
             
           </h2>
@@ -553,20 +503,6 @@
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/09/13/cocos2d-x_main_element/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/13/cocos2d-x_main_element/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -593,15 +529,17 @@
       
         
           
-            <p>
-              主要组件核心组件就是 场景(Scene)，结点(Node)，精灵(Sprite)，菜单(Menu)，动作(Action)
+          主要组件核心组件就是 场景(Scene)，结点(Node)，精灵(Sprite)，菜单(Menu)，动作(Action)
 如图
 
 导演 Director一个游戏只有一个导演，负责控制流程和告诉接收者(recipient)怎么做，想象一下你是一个生产的执行者，告诉导演怎么做导演一个平常的任务就是控制场
-              ...
-            </p>
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/13/cocos2d-x_main_element/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -615,9 +553,6 @@
 
     
 
-    
-      
-    
     
 
     
@@ -657,16 +592,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/29/apns_summary/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/29/apns_summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -676,8 +611,9 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/07/29/apns_summary/" class="post-title-link" itemprop="url">APNS原理总结</a>
+                <a class="post-title-link" href="/2016/07/29/apns_summary/" itemprop="url">
+                  APNS原理总结
+                </a>
               
             
           </h2>
@@ -712,20 +648,6 @@
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/07/29/apns_summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/29/apns_summary/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -752,14 +674,16 @@
       
         
           
-            <p>
-              什么是APNs先说一下远程推送，一般我们有自己的服务器，在这个过程中是Provider的角色，如图，推送从我们的服务器到我们的APP的过程就是要通过APNs来发送
+          什么是APNs先说一下远程推送，一般我们有自己的服务器，在这个过程中是Provider的角色，如图，推送从我们的服务器到我们的APP的过程就是要通过APNs来发送
 
 APNs(Apple Push Notification service)是远程推送功能的核心，通过APNs客户端和苹果服务器建立一个
-              ...
-            </p>
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/29/apns_summary/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -773,9 +697,6 @@ APNs(Apple Push Notification service)是远程推送功能的核心，通过APNs
 
     
 
-    
-      
-    
     
 
     
@@ -815,16 +736,16 @@ APNs(Apple Push Notification service)是远程推送功能的核心，通过APNs
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/15/c_sort_algorithm/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/15/c_sort_algorithm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -834,8 +755,9 @@ APNs(Apple Push Notification service)是远程推送功能的核心，通过APNs
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/07/15/c_sort_algorithm/" class="post-title-link" itemprop="url">常见排序算法C++总结</a>
+                <a class="post-title-link" href="/2016/07/15/c_sort_algorithm/" itemprop="url">
+                  常见排序算法C++总结
+                </a>
               
             
           </h2>
@@ -870,20 +792,6 @@ APNs(Apple Push Notification service)是远程推送功能的核心，通过APNs
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/07/15/c_sort_algorithm/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/15/c_sort_algorithm/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -910,16 +818,18 @@ APNs(Apple Push Notification service)是远程推送功能的核心，通过APNs
       
         
           
-            <p>
-              C++排序算法看了总结图，我这里就总结一下 直接插入排序，冒泡排序，快速排序，堆排序和归并排序，使用C++实现
+          C++排序算法看了总结图，我这里就总结一下 直接插入排序，冒泡排序，快速排序，堆排序和归并排序，使用C++实现
 重新画了总结图
 直接插入排序整个序列分为有序区和无序区，取第一个元素作为初始有序区，然后第二个开始，依次插入到有序区的合适位置，直到排好序
 刚开始在我那本《数据结构》看到大概这样的实现
-v
-              ...
-            </p>
+1
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/15/c_sort_algorithm/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -933,9 +843,6 @@ v
 
     
 
-    
-      
-    
     
 
     
@@ -975,16 +882,16 @@ v
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/08/runloop_learning_summary/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/08/runloop_learning_summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -994,8 +901,9 @@ v
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/07/08/runloop_learning_summary/" class="post-title-link" itemprop="url">RunLoop学习总结</a>
+                <a class="post-title-link" href="/2016/07/08/runloop_learning_summary/" itemprop="url">
+                  RunLoop学习总结
+                </a>
               
             
           </h2>
@@ -1030,20 +938,6 @@ v
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/07/08/runloop_learning_summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/08/runloop_learning_summary/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1070,12 +964,14 @@ v
       
         
           
-            <p>
-              开始很久之前就看了一次YY的文章，没看懂。后来又看了sunny的视频和叶孤城的直播的视频，找了很多资料，对RunLoop也越来越清晰，然后又看了两三次YY的文章，虽然还没完全看懂，不得不说写的非常好，帮助很大。还有官方文档，学到了很多东西。还有就是github上的一些demo，文中一些代码别人写过了
-              ...
-            </p>
+          开始很久之前就看了一次YY的文章，没看懂。后来又看了sunny的视频和叶孤城的直播的视频，找了很多资料，对RunLoop也越来越清晰，然后又看了两三次YY的文章，虽然还没完全看懂，不得不说写的非常好，帮助很大。还有官方文档，学到了很多东西。还有就是github上的一些demo，文中一些代码别人写过了
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/08/runloop_learning_summary/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -1089,9 +985,6 @@ v
 
     
 
-    
-      
-    
     
 
     
@@ -1131,16 +1024,16 @@ v
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/02/singlton_learning/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/02/singlton_learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -1150,8 +1043,9 @@ v
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/07/02/singlton_learning/" class="post-title-link" itemprop="url">单例模式探索</a>
+                <a class="post-title-link" href="/2016/07/02/singlton_learning/" itemprop="url">
+                  单例模式探索
+                </a>
               
             
           </h2>
@@ -1186,20 +1080,6 @@ v
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/07/02/singlton_learning/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/02/singlton_learning/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1226,13 +1106,15 @@ v
       
         
           
-            <p>
-              以前写OC中的单例很固定，一直都这样写，后来我就把它放在快捷代码块里面，只要输入singleton就直接输出这段代码
-+ (instancetype)instance&#123;    static Class *sharedInstance = nil;    static dispatch_on
-              ...
-            </p>
+          以前写OC中的单例很固定，一直都这样写，后来我就把它放在快捷代码块里面，只要输入singleton就直接输出这段代码
+123456789+ (instancetype)instance&#123;    static Class *sharedInstance = nil;    static di
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/07/02/singlton_learning/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -1246,9 +1128,6 @@ v
 
     
 
-    
-      
-    
     
 
     
@@ -1288,16 +1167,16 @@ v
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/05/28/https_learning_summary/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/05/28/https_learning_summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -1307,8 +1186,9 @@ v
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/05/28/https_learning_summary/" class="post-title-link" itemprop="url">HTTPS学习总结</a>
+                <a class="post-title-link" href="/2016/05/28/https_learning_summary/" itemprop="url">
+                  HTTPS学习总结
+                </a>
               
             
           </h2>
@@ -1343,20 +1223,6 @@ v
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/05/28/https_learning_summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/05/28/https_learning_summary/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1383,13 +1249,15 @@ v
       
         
           
-            <p>
-              简述HTTPS对比HTTP就多了一个安全层SSL/TLS，具体就是验证服务端的证书和对内容进行加密。
+          简述HTTPS对比HTTP就多了一个安全层SSL/TLS，具体就是验证服务端的证书和对内容进行加密。
 先来看看HTTP和HTTPS的区别我用AFN访问http下的httpbin.org/image/png然后用Charles抓一下包，可以看到传输的图片然后访问HTTPS下的https://httpb
-              ...
-            </p>
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/28/https_learning_summary/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -1403,9 +1271,6 @@ v
 
     
 
-    
-      
-    
     
 
     
@@ -1445,16 +1310,16 @@ v
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/04/15/a_project_report/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/04/15/a_project_report/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -1464,8 +1329,9 @@ v
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/04/15/a_project_report/" class="post-title-link" itemprop="url">一个项目总结</a>
+                <a class="post-title-link" href="/2016/04/15/a_project_report/" itemprop="url">
+                  一个项目总结
+                </a>
               
             
           </h2>
@@ -1500,20 +1366,6 @@ v
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/04/15/a_project_report/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/15/a_project_report/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1540,13 +1392,15 @@ v
       
         
           
-            <p>
-              进度项目做了一个多月了，现在进度大概五成左右估计5月中旬会上线当初一开始做这个项目的时候，觉得没什么的，很多东西都学过了，只需要花时间做出来就行了😌，不会的也可以边学边做到后面越做越吃力，从来没有做过这么大的项目，需要注意的细节太多太多，这大概就是大项目吧
+          进度项目做了一个多月了，现在进度大概五成左右估计5月中旬会上线当初一开始做这个项目的时候，觉得没什么的，很多东西都学过了，只需要花时间做出来就行了😌，不会的也可以边学边做到后面越做越吃力，从来没有做过这么大的项目，需要注意的细节太多太多，这大概就是大项目吧
 纯代码还是IB这个问题刚开始的时候有点纠
-              ...
-            </p>
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/04/15/a_project_report/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -1560,9 +1414,6 @@ v
 
     
 
-    
-      
-    
     
 
     
@@ -1602,16 +1453,16 @@ v
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/04/10/chained_coding_pattern/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/04/10/chained_coding_pattern/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -1621,8 +1472,9 @@ v
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/04/10/chained_coding_pattern/" class="post-title-link" itemprop="url">链式编程思想</a>
+                <a class="post-title-link" href="/2016/04/10/chained_coding_pattern/" itemprop="url">
+                  链式编程思想
+                </a>
               
             
           </h2>
@@ -1657,20 +1509,6 @@ v
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/04/10/chained_coding_pattern/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/04/10/chained_coding_pattern/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1697,17 +1535,19 @@ v
       
         
           
-            <p>
-              链式编程是什么链式编程就是将调用多个方法用点语法连接起来，让代码更加简洁和可读性更高刚开始接触链式编程是Masonry，用起来真的非常爽
-make.left.right.top.equalTo(self.view);
+          链式编程是什么链式编程就是将调用多个方法用点语法连接起来，让代码更加简洁和可读性更高刚开始接触链式编程是Masonry，用起来真的非常爽
+1make.left.right.top.equalTo(self.view);
 这样一句语句就调用了4个方法
 
 .left调用了left属性的get方法
-.rig
-              ...
-            </p>
+.ri
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/04/10/chained_coding_pattern/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -1721,9 +1561,6 @@ make.left.right.top.equalTo(self.view);
 
     
 
-    
-      
-    
     
 
     
@@ -1763,16 +1600,16 @@ make.left.right.top.equalTo(self.view);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/03/10/sdwebimage_reading_note/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/03/10/sdwebimage_reading_note/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -1782,8 +1619,9 @@ make.left.right.top.equalTo(self.view);
         
           <h2 class="post-title" itemprop="name headline">
                 
-                
-                <a href="/2016/03/10/sdwebimage_reading_note/" class="post-title-link" itemprop="url">读SDWebImage笔记</a>
+                <a class="post-title-link" href="/2016/03/10/sdwebimage_reading_note/" itemprop="url">
+                  读SDWebImage笔记
+                </a>
               
             
           </h2>
@@ -1818,20 +1656,6 @@ make.left.right.top.equalTo(self.view);
 
           
             
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/03/10/sdwebimage_reading_note/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/10/sdwebimage_reading_note/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1858,8 +1682,7 @@ make.left.right.top.equalTo(self.view);
       
         
           
-            <p>
-              介绍github地址：
+          介绍github地址：
 https://github.com/rs/SDWebImage
 简介一个异步图片下载及缓存的库
 特性：
@@ -1871,10 +1694,13 @@ https://github.com/rs/SDWebImage
 支持WebP
 背景图片减压
 保
-              ...
-            </p>
+          ...
           <!--noindex-->
-          
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/10/sdwebimage_reading_note/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
           <!--/noindex-->
         
       
@@ -1888,9 +1714,6 @@ https://github.com/rs/SDWebImage
 
     
 
-    
-      
-    
     
 
     
@@ -1940,22 +1763,23 @@ https://github.com/rs/SDWebImage
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
                 src="/images/stan.png"
-                alt="Ascen Zhong"/>
+                alt="Ascen Zhong" />
             
               <p class="site-author-name" itemprop="name">Ascen Zhong</p>
-              <div class="site-description motion-element" itemprop="description">Ascen的个人博客</div>
+              <p class="site-description motion-element" itemprop="description">Ascen的个人博客</p>
           </div>
 
           
@@ -1975,11 +1799,7 @@ https://github.com/rs/SDWebImage
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -1998,11 +1818,7 @@ https://github.com/rs/SDWebImage
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -2063,30 +1879,19 @@ https://github.com/rs/SDWebImage
             <div class="links-of-author motion-element">
               
                 <span class="links-of-author-item">
+                  <a href="https://github.com/AscenZ" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
                   
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://github.com/AscenX" title="GitHub &rarr; https://github.com/AscenX" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
+                  <a href="mailto:zyb428@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="mailto:zyb428@gmail.com" title="E-Mail &rarr; mailto:zyb428@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
             </div>
           
 
+          
           
 
           
@@ -2098,7 +1903,7 @@ https://github.com/rs/SDWebImage
           
 
         </div>
-      </div>
+      </section>
 
       
 
@@ -2106,7 +1911,6 @@ https://github.com/rs/SDWebImage
 
     </div>
   </aside>
-  
 
 
         
@@ -2127,7 +1931,11 @@ https://github.com/rs/SDWebImage
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -2139,21 +1947,23 @@ https://github.com/rs/SDWebImage
         
 
 
-  <script>
-    var _mtac = {};
-    (function() {
-      var mta = document.createElement("script");
-      mta.src = "https://pingjs.qq.com/h5/stats.js";
-      mta.setAttribute("name", "MTAH5");
-      mta.setAttribute("sid", "500646422");
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(mta, s);
-    })();
-  </script>
+
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500646422");
+
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
 
 
 
-  <script>
+  <script type="text/javascript">
     (function() {
       var hm = document.createElement("script");
       hm.src = "//tajs.qq.com/stats?sId=66030421";
@@ -2165,15 +1975,19 @@ https://github.com/rs/SDWebImage
 
 
 
-
         
       </div>
     </footer>
 
     
-
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
+	
     
 
     
@@ -2181,7 +1995,7 @@ https://github.com/rs/SDWebImage
 
   
 
-<script>
+<script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -2213,54 +2027,43 @@ https://github.com/rs/SDWebImage
 
 
   
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
   
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/js/src/motion.js?v=7.0.1"></script>
-
-
 
   
   
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
 
-
-  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
-
-
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
   
-
-
-  <script src="/js/src/next-boot.js?v=7.0.1"></script>
-
-
   
 
   
 
   
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
   
-  
-  <script id="dsq-count-scr" src="https://ascen.disqus.com/count.js" async></script>
-
-
-
-
 
 
 
@@ -2269,9 +2072,17 @@ https://github.com/rs/SDWebImage
 
 
 
-  
+
+
+
+
+
 
   
+
+
+
+
 
   
 
@@ -2281,6 +2092,7 @@ https://github.com/rs/SDWebImage
 
   
 
+  
   
 
   
