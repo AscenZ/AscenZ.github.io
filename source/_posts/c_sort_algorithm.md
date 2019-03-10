@@ -13,7 +13,7 @@ categories:
 看了总结图，我这里就总结一下 直接插入排序，冒泡排序，快速排序，堆排序和归并排序，使用C++实现
 
 重新画了总结图
-![2016-07-15_常用排序算法.png](http://7xsnb0.com1.z0.glb.clouddn.com/2016-07-15_%E5%B8%B8%E7%94%A8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95.png)
+![2016-07-15_常用排序算法.png](https://raw.githubusercontent.com/AscenX/AscenX.github.io/backup/images/sort_algorithm.png)
 
 ### 直接插入排序
 整个序列分为有序区和无序区，取第一个元素作为初始有序区，然后第二个开始，依次插入到有序区的合适位置，直到排好序
