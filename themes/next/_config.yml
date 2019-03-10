@@ -155,7 +155,7 @@ site_state: true
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  GitHub: https://github.com/AscenZ || github
+  GitHub: https://github.com/AscenX || github
   E-Mail: mailto:zyb428@gmail.com || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -518,8 +518,8 @@ gitment:
   lazy: false # Comments lazy loading with a button
   cleanly: false # Hide 'Powered by ...' on footer, and more
   language: zh-Hans # Force language, or auto switch by theme
-  github_user: AscenZ # MUST HAVE, Your Github Username
-  github_repo: AscenZ.github.io # MUST HAVE, The name of the repo you use to store Gitment comments
+  github_user: AscenX # MUST HAVE, Your Github Username
+  github_repo: AscenX.github.io # MUST HAVE, The name of the repo you use to store Gitment comments
   client_id: # MUST HAVE, Github client id for the Gitment
   client_secret: # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect

@@ -78,11 +78,11 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:AscenZ/AscenZ.github.io.git
+  repo: git@github.com:AscenX/AscenX.github.io.git
   breanch: master
 
 
 backup:
     type: git
     repository:
-       github: git@github.com:AscenZ/AscenZ.github.io.git,backup
+       github: git@github.com:AscenX/AscenX.github.io.git,backup
