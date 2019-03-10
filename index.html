@@ -17,23 +17,9 @@
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="theme-color" content="#222"/>
 
 
 
@@ -56,37 +42,41 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/stan-touch.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/stan-32x32.png?v=6.4.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/stan-16x16.png?v=6.4.1">
-
-
-  <link rel="mask-icon" href="/images/stan.svg?v=6.4.1" color="#222">
 
 
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/stan-touch.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/stan-32x32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/stan-16x16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/stan.svg?v=7.0.1" color="#222">
 
 
 
 
 
-<script type="text/javascript" id="hexo.configurations">
+
+
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '6.4.1',
+    version: '7.0.1',
     sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    back2top: ,
+    back2top_sidebar: ,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -128,7 +118,7 @@
 
 
 
-<script type="text/javascript" id="page.configurations">
+<script id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -145,30 +135,31 @@
 
 
 
+
+
+
   <noscript>
-  <style type="text/css">
-    .use-motion .motion-element,
-    .use-motion .brand,
-    .use-motion .menu-item,
-    .sidebar-inner,
-    .use-motion .post-block,
-    .use-motion .pagination,
-    .use-motion .comments,
-    .use-motion .post-header,
-    .use-motion .post-body,
-    .use-motion .collection-title { opacity: initial; }
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
-    .use-motion .logo,
-    .use-motion .site-title,
-    .use-motion .site-subtitle {
-      opacity: initial;
-      top: initial;
-    }
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
-    .use-motion {
-      .logo-line-before i { left: initial; }
-      .logo-line-after i { right: initial; }
-    }
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
   </style>
 </noscript>
 
@@ -187,7 +178,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta">
     
 
     <div class="custom-logo-site-title">
@@ -197,6 +188,7 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
+    
     
   </div>
 
@@ -220,40 +212,85 @@
         
           
           <li class="menu-item menu-item-home menu-item-active">
-    <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-archives">
-    <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-    <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-    <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-    <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
   </li>
 
       
@@ -304,16 +341,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2019/02/03/dart-async/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2019/02/03/dart-async/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -323,9 +360,8 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/03/dart-async/" itemprop="url">
-                  Dart中的异步编程
-                </a>
+                
+                <a href="/2019/02/03/dart-async/" class="post-title-link" itemprop="url">Dart中的异步编程</a>
               
             
           </h2>
@@ -350,7 +386,7 @@
                 
               
 
-              <time title="创建时间：2019-02-03 01:25:59" itemprop="dateCreated datePublished" datetime="2019-02-03T01:25:59+08:00">2019-02-03</time>
+              <time title="创建时间：2019-02-03 22:18:25" itemprop="dateCreated datePublished" datetime="2019-02-03T22:18:25+08:00">2019-02-03</time>
             
 
             
@@ -359,6 +395,20 @@
           
 
           
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/02/03/dart-async/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/03/dart-async/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -386,15 +436,13 @@
       
         
           
-          Dart中的异步最近在写Flutter，结果发现Dart的异步编程还和我目前学过的都不太一样，简单总结一下。
+            <p>
+              Dart中的异步最近在写Flutter，结果发现Dart的异步编程还和我目前学过的都不太一样，简单总结一下。
 Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是一个异步操作返回的结果，类型是T如果返回的是不可用的值，则应该为Future&lt;voi
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/02/03/dart-async/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -408,6 +456,9 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
 
     
 
+    
+      
+    
     
 
     
@@ -447,16 +498,16 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2018/01/01/2017_summary/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2018/01/01/2017_summary/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -466,9 +517,8 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/01/2017_summary/" itemprop="url">
-                  2017又结束啦感觉过的挺迷茫的还是总结一下吧
-                </a>
+                
+                <a href="/2018/01/01/2017_summary/" class="post-title-link" itemprop="url">2017又结束啦感觉过的挺迷茫的还是总结一下吧</a>
               
             
           </h2>
@@ -503,6 +553,20 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2018/01/01/2017_summary/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/01/2017_summary/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -529,15 +593,13 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
       
         
           
-          学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式
+            <p>
+              学习想法在二月份出来实习的时候进了个小公司，公司虽小但是技术栈还是挺先进的，学到了很多新知识，也让我一些学习有了想法上的改变。像之前做项目的时候，我们仅仅是专注于一端，只关注一端，你给我接口，我拿到数据展示便可。之前我也没关注过后端，在公司实习之前才知道RESTful API这种API 设计模式
 不
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/01/2017_summary/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -551,6 +613,9 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
 
     
 
+    
+      
+    
     
 
     
@@ -590,16 +655,16 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/06/20/im-app-developing/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/06/20/im-app-developing/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -609,9 +674,8 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/20/im-app-developing/" itemprop="url">
-                  从零开发一个即时通讯APP
-                </a>
+                
+                <a href="/2017/06/20/im-app-developing/" class="post-title-link" itemprop="url">从零开发一个即时通讯APP</a>
               
             
           </h2>
@@ -646,6 +710,20 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/06/20/im-app-developing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/20/im-app-developing/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -672,14 +750,12 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
       
         
           
-          前言这是我的毕业设计。刚开始确定这个课题的时候是因为以前有稍微研究过一些XMPP协议，在这个基础上做起来应该不难。然后开始选技术的时候还有半年，我想为什么不从更底层做起呢！那就不用XMPP，当时接触过相关的即时通讯技术还有WebSocket，那为什么直接从更底层的Socket开始封装呢服务端就用Go
-          ...
+            <p>
+              前言这是我的毕业设计。刚开始确定这个课题的时候是因为以前有稍微研究过一些XMPP协议，在这个基础上做起来应该不难。然后开始选技术的时候还有半年，我想为什么不从更底层做起呢！那就不用XMPP，当时接触过相关的即时通讯技术还有WebSocket，那为什么直接从更底层的Socket开始封装呢服务端就用Go
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/06/20/im-app-developing/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -693,6 +769,9 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
 
     
 
+    
+      
+    
     
 
     
@@ -732,16 +811,16 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/04/23/archive-use-xcodebuild-in-shell/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/04/23/archive-use-xcodebuild-in-shell/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -751,9 +830,8 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/23/archive-use-xcodebuild-in-shell/" itemprop="url">
-                  在shell上使用xcodebuild打包
-                </a>
+                
+                <a href="/2017/04/23/archive-use-xcodebuild-in-shell/" class="post-title-link" itemprop="url">在shell上使用xcodebuild打包</a>
               
             
           </h2>
@@ -788,6 +866,20 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/04/23/archive-use-xcodebuild-in-shell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/23/archive-use-xcodebuild-in-shell/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -814,15 +906,13 @@ Future什么是 FutureFuture 就是一个Future&lt;T&gt; 对象，代表就是�
       
         
           
-          最近学习了一下shell脚本，对unix很多命令更熟悉了，也学到了很多新命令简单使用xcodebuild来写了一个打包的脚本，流程是打包，导出ipa，上传到蒲公英 / bugly之类的测试网站，通知 slack
+            <p>
+              最近学习了一下shell脚本，对unix很多命令更熟悉了，也学到了很多新命令简单使用xcodebuild来写了一个打包的脚本，流程是打包，导出ipa，上传到蒲公英 / bugly之类的测试网站，通知 slack
 archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuild来
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/23/archive-use-xcodebuild-in-shell/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -836,6 +926,9 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
 
     
 
+    
+      
+    
     
 
     
@@ -875,16 +968,16 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/04/15/rac_pit/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/04/15/rac_pit/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -894,9 +987,8 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/15/rac_pit/" itemprop="url">
-                  RAC的一些坑
-                </a>
+                
+                <a href="/2017/04/15/rac_pit/" class="post-title-link" itemprop="url">RAC的一些坑</a>
               
             
           </h2>
@@ -931,6 +1023,20 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/04/15/rac_pit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/15/rac_pit/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -957,15 +1063,13 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
       
         
           
-          前言记得第一个项目用RAC的时候，对MVVM还不理解，通用对RAC也不理解最近项目中一直在用RAC，OC版的（之前叫ReactiveCocoa，现在分离出OC版的ReactiveObjc），也算入门了吧，也终于理解了MVVM现在用的越多，发现RAC一些用法是有些坑的，总结一下
+            <p>
+              前言记得第一个项目用RAC的时候，对MVVM还不理解，通用对RAC也不理解最近项目中一直在用RAC，OC版的（之前叫ReactiveCocoa，现在分离出OC版的ReactiveObjc），也算入门了吧，也终于理解了MVVM现在用的越多，发现RAC一些用法是有些坑的，总结一下
 关于Model刚开始学
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/15/rac_pit/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -979,6 +1083,9 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
 
     
 
+    
+      
+    
     
 
     
@@ -1018,16 +1125,16 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/02/19/restful_api/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/02/19/restful_api/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -1037,9 +1144,8 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/02/19/restful_api/" itemprop="url">
-                  基于RESTful API的设计模式小实践
-                </a>
+                
+                <a href="/2017/02/19/restful_api/" class="post-title-link" itemprop="url">基于RESTful API的设计模式小实践</a>
               
             
           </h2>
@@ -1074,6 +1180,20 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/02/19/restful_api/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/02/19/restful_api/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1100,14 +1220,12 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
       
         
           
-          RESTful APIREST是REpresentational State Transfer的缩写，表现层状态转移，这里的表现层指的是资源我们设计API的时候每一个url都要指向一个资源例如现在有一个订单（资源）http://example.com/api/v1/orders而我们的操作由HTTP
-          ...
+            <p>
+              RESTful APIREST是REpresentational State Transfer的缩写，表现层状态转移，这里的表现层指的是资源我们设计API的时候每一个url都要指向一个资源例如现在有一个订单（资源）http://example.com/api/v1/orders而我们的操作由HTTP
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/19/restful_api/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -1121,6 +1239,9 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
 
     
 
+    
+      
+    
     
 
     
@@ -1160,16 +1281,16 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/29/go_parallelism/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/29/go_parallelism/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -1179,9 +1300,8 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/29/go_parallelism/" itemprop="url">
-                  Go并发初步学习
-                </a>
+                
+                <a href="/2017/01/29/go_parallelism/" class="post-title-link" itemprop="url">Go并发初步学习</a>
               
             
           </h2>
@@ -1216,6 +1336,20 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/01/29/go_parallelism/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/29/go_parallelism/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1242,17 +1376,15 @@ archive打包，和导出ipa都是使用这个命令，可以使用man xcodebuil
       
         
           
-          并发(concurrent)与并行(parallelism)并发就是一个处理器同时处理多个任务，不是真正的同时处理，需要在多线程中快速切换，由于切换速度非常快造成同时的假象并行就是真正的同时发生，一般是多个处理器或者多核处理器同时处理多个任务
+            <p>
+              并发(concurrent)与并行(parallelism)并发就是一个处理器同时处理多个任务，不是真正的同时处理，需要在多线程中快速切换，由于切换速度非常快造成同时的假象并行就是真正的同时发生，一般是多个处理器或者多核处理器同时处理多个任务
 这张图很有概括性，图来自网上
 
 goroutine在Go
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/29/go_parallelism/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -1266,6 +1398,9 @@ goroutine在Go
 
     
 
+    
+      
+    
     
 
     
@@ -1305,16 +1440,16 @@ goroutine在Go
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/27/go_interface_reflection/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/27/go_interface_reflection/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -1324,9 +1459,8 @@ goroutine在Go
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/27/go_interface_reflection/" itemprop="url">
-                  Go语言中的接口和反射
-                </a>
+                
+                <a href="/2017/01/27/go_interface_reflection/" class="post-title-link" itemprop="url">Go语言中的接口和反射</a>
               
             
           </h2>
@@ -1361,6 +1495,20 @@ goroutine在Go
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/01/27/go_interface_reflection/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/27/go_interface_reflection/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1387,14 +1535,12 @@ goroutine在Go
       
         
           
-          接口 interface接口就是一个或多个方法的集合，若某个类型的对象实现了所有的方法，那么这个对象就实现了这个接口接口还可以存储值，只要这个类型的对象实现了这个接口，那么这个接口就可以存储这个类型的对象又因为空接口(interface{})没有一个方法，每个类型的对象至少实现了0个或者0个以上的方
-          ...
+            <p>
+              接口 interface接口就是一个或多个方法的集合，若某个类型的对象实现了所有的方法，那么这个对象就实现了这个接口接口还可以存储值，只要这个类型的对象实现了这个接口，那么这个接口就可以存储这个类型的对象又因为空接口(interface{})没有一个方法，每个类型的对象至少实现了0个或者0个以上的方
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/27/go_interface_reflection/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -1408,6 +1554,9 @@ goroutine在Go
 
     
 
+    
+      
+    
     
 
     
@@ -1447,16 +1596,16 @@ goroutine在Go
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/08/cpp_raii_smart_ptr/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/08/cpp_raii_smart_ptr/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -1466,9 +1615,8 @@ goroutine在Go
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/08/cpp_raii_smart_ptr/" itemprop="url">
-                  C++ RAII与智能指针
-                </a>
+                
+                <a href="/2017/01/08/cpp_raii_smart_ptr/" class="post-title-link" itemprop="url">C++ RAII与智能指针</a>
               
             
           </h2>
@@ -1503,6 +1651,20 @@ goroutine在Go
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/01/08/cpp_raii_smart_ptr/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/08/cpp_raii_smart_ptr/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1529,15 +1691,13 @@ goroutine在Go
       
         
           
-          什么是RAII资源获取即初始化 (Resource Acquisition Is Initialization, RAII)，RAII是一种资源管理机制，资源的有效期与持有资源的对象生命期严格绑定，即由对象的构造函数完成资源的分配，由析构函数完成资源的释放，总结一句话就是 用对象来管理资源
+            <p>
+              什么是RAII资源获取即初始化 (Resource Acquisition Is Initialization, RAII)，RAII是一种资源管理机制，资源的有效期与持有资源的对象生命期严格绑定，即由对象的构造函数完成资源的分配，由析构函数完成资源的释放，总结一句话就是 用对象来管理资源
 RAII
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/08/cpp_raii_smart_ptr/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -1551,6 +1711,9 @@ RAII
 
     
 
+    
+      
+    
     
 
     
@@ -1590,16 +1753,16 @@ RAII
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/06/process_thread_multithread/">
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2017/01/06/process_thread_multithread/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong">
-      <meta itemprop="description" content="Ascen的个人博客">
-      <meta itemprop="image" content="/images/stan.png">
+      <meta itemprop="name" content="Ascen Zhong"/>
+      <meta itemprop="description" content="Ascen的个人博客"/>
+      <meta itemprop="image" content="/images/stan.png"/>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛">
+      <meta itemprop="name" content="Ascen的羽毛"/>
     </span>
 
     
@@ -1609,9 +1772,8 @@ RAII
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/06/process_thread_multithread/" itemprop="url">
-                  进程、线程理解及多线程
-                </a>
+                
+                <a href="/2017/01/06/process_thread_multithread/" class="post-title-link" itemprop="url">进程、线程理解及多线程</a>
               
             
           </h2>
@@ -1646,6 +1808,20 @@ RAII
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2017/01/06/process_thread_multithread/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/01/06/process_thread_multithread/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -1672,16 +1848,14 @@ RAII
       
         
           
-          进程 Process进程是正在运行的程序的实例，一个任务就是一个进程如下图，每一个运行的程序就是一个进程，有系统的，也有用户的
+            <p>
+              进程 Process进程是正在运行的程序的实例，一个任务就是一个进程如下图，每一个运行的程序就是一个进程，有系统的，也有用户的
 
 进程间通信 IPC (Inter-Process Communication)至少两个进程或县城建传送数据或信号的一些技术和方法，进程是彼此隔离的，为了让不同进程互相访问
-          ...
+              ...
+            </p>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/06/process_thread_multithread/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
@@ -1695,6 +1869,9 @@ RAII
 
     
 
+    
+      
+    
     
 
     
@@ -1744,23 +1921,22 @@ RAII
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
                 src="/images/stan.png"
-                alt="Ascen Zhong" />
+                alt="Ascen Zhong"/>
             
               <p class="site-author-name" itemprop="name">Ascen Zhong</p>
-              <p class="site-description motion-element" itemprop="description">Ascen的个人博客</p>
+              <div class="site-description motion-element" itemprop="description">Ascen的个人博客</div>
           </div>
 
           
@@ -1780,7 +1956,11 @@ RAII
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
                     
                     
                       
@@ -1799,8 +1979,14 @@ RAII
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  
                     
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
                     
                       
                     
@@ -1858,19 +2044,30 @@ RAII
             <div class="links-of-author motion-element">
               
                 <span class="links-of-author-item">
-                  <a href="https://github.com/AscenZ" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
                   
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/AscenX" title="GitHub &rarr; https://github.com/AscenX" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="mailto:zyb428@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:zyb428@gmail.com" title="E-Mail &rarr; mailto:zyb428@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
             </div>
           
 
-          
           
 
           
@@ -1882,7 +2079,7 @@ RAII
           
 
         </div>
-      </section>
+      </div>
 
       
 
@@ -1890,6 +2087,7 @@ RAII
 
     </div>
   </aside>
+  
 
 
         
@@ -1910,11 +2108,7 @@ RAII
 </div>
 
 
-  
-
-
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
 
 
 
@@ -1926,23 +2120,21 @@ RAII
         
 
 
-
-<script>
-  	var _mtac = {};
-  	(function() {
-  		var mta = document.createElement("script");
-  		mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.4";
-  		mta.setAttribute("name", "MTAH5");
-  		mta.setAttribute("sid", "500646422");
-
-  		var s = document.getElementsByTagName("script")[0];
-  		s.parentNode.insertBefore(mta, s);
-  	})();
-</script>
+  <script>
+    var _mtac = {};
+    (function() {
+      var mta = document.createElement("script");
+      mta.src = "https://pingjs.qq.com/h5/stats.js";
+      mta.setAttribute("name", "MTAH5");
+      mta.setAttribute("sid", "500646422");
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(mta, s);
+    })();
+  </script>
 
 
 
-  <script type="text/javascript">
+  <script>
     (function() {
       var hm = document.createElement("script");
       hm.src = "//tajs.qq.com/stats?sId=66030421";
@@ -1954,19 +2146,15 @@ RAII
 
 
 
+
         
       </div>
     </footer>
 
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
 
     
-	
+
     
 
     
@@ -1974,7 +2162,7 @@ RAII
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -2006,61 +2194,39 @@ RAII
 
 
   
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+  <script src="/js/src/utils.js?v=7.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+  <script src="/js/src/motion.js?v=7.0.1"></script>
 
 
 
   
   
 
-  
 
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
 
 
 
 
   
 
+  
 
 
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
 
 
   
@@ -2070,8 +2236,32 @@ RAII
   
 
   
+  
+  <script id="dsq-count-scr" src="https://ascen.disqus.com/count.js" async></script>
+
+
+
+
+
+
 
   
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
