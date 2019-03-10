@@ -17,9 +17,23 @@
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
-<meta name="theme-color" content="#222"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -42,25 +56,21 @@
 
 
 
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/stan-touch.png?v=6.4.1">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
-
-<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/stan-32x32.png?v=6.4.1">
 
 
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/stan-touch.png?v=7.0.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/stan-16x16.png?v=6.4.1">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/stan-32x32.png?v=7.0.1">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/stan-16x16.png?v=7.0.1">
-
-
-  <link rel="mask-icon" href="/images/stan.svg?v=7.0.1" color="#222">
+  <link rel="mask-icon" href="/images/stan.svg?v=6.4.1" color="#222">
 
 
 
@@ -68,15 +78,15 @@
 
 
 
-<script id="hexo.configurations">
+
+
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '7.0.1',
+    version: '6.4.1',
     sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    back2top: ,
-    back2top_sidebar: ,
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -126,7 +136,7 @@
 
 
 
-<script id="page.configurations">
+<script type="text/javascript" id="page.configurations">
   CONFIG.page = {
     sidebar: "",
   };
@@ -143,31 +153,30 @@
 
 
 
-
-
-
   <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
   </style>
 </noscript>
 
@@ -185,7 +194,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
+  <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
@@ -195,7 +204,6 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-    
     
   </div>
 
@@ -219,85 +227,40 @@
         
           
           <li class="menu-item menu-item-home">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
-
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-archives">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
-
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-categories">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
-
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-tags">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
-
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
   </li>
         
         
         
           
           <li class="menu-item menu-item-about">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
-
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
   </li>
 
       
@@ -348,16 +311,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/29/apns_summary/"/>
+    <link itemprop="mainEntityOfPage" href="http://ascen.me/2016/07/29/apns_summary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ascen Zhong"/>
-      <meta itemprop="description" content="Ascen的个人博客"/>
-      <meta itemprop="image" content="/images/stan.png"/>
+      <meta itemprop="name" content="Ascen Zhong">
+      <meta itemprop="description" content="Ascen的个人博客">
+      <meta itemprop="image" content="/images/stan.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ascen的羽毛"/>
+      <meta itemprop="name" content="Ascen的羽毛">
     </span>
 
     
@@ -366,7 +329,6 @@
         
         
           <h2 class="post-title" itemprop="name headline">APNS原理总结
-
               
             
           </h2>
@@ -400,20 +362,6 @@
           
 
           
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2016/07/29/apns_summary/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/29/apns_summary/" itemprop="commentCount"></span>
-                </a>
-              </span>
             
           
 
@@ -472,9 +420,6 @@
     
 
     
-      
-    
-    
 
     
 
@@ -530,13 +475,6 @@
           
 
   
-    <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-      </div>
-    </div>
-
-  
 
 
 
@@ -553,6 +491,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
@@ -568,16 +507,16 @@
         </ul>
       
 
-      <div class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image"
                 src="/images/stan.png"
-                alt="Ascen Zhong"/>
+                alt="Ascen Zhong" />
             
               <p class="site-author-name" itemprop="name">Ascen Zhong</p>
-              <div class="site-description motion-element" itemprop="description">Ascen的个人博客</div>
+              <p class="site-description motion-element" itemprop="description">Ascen的个人博客</p>
           </div>
 
           
@@ -587,7 +526,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">22</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -597,11 +536,7 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
+                  <a href="/categories/index.html">
                     
                     
                       
@@ -620,11 +555,7 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
+                  <a href="/tags/index.html">
                     
                     
                       
@@ -669,7 +600,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -683,30 +614,19 @@
             <div class="links-of-author motion-element">
               
                 <span class="links-of-author-item">
+                  <a href="https://github.com/AscenZ" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
                   
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="https://github.com/AscenX" title="GitHub &rarr; https://github.com/AscenX" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
                 </span>
               
                 <span class="links-of-author-item">
+                  <a href="mailto:zyb428@gmail.com" target="_blank" title="E-Mail" rel="external nofollow"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   
-                  
-                    
-                  
-                  
-                    
-                  
-                  <a href="mailto:zyb428@gmail.com" title="E-Mail &rarr; mailto:zyb428@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
             </div>
           
 
+          
           
 
           
@@ -718,16 +638,15 @@
           
 
         </div>
-      </div>
+      </section>
 
       
       <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
 
             
-            
-            
+              
             
 
             
@@ -735,7 +654,7 @@
             
 
           </div>
-        </div>
+        </section>
       <!--/noindex-->
       
 
@@ -743,7 +662,6 @@
 
     </div>
   </aside>
-  
 
 
         
@@ -764,7 +682,11 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
+  
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" rel="external nofollow" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -776,21 +698,23 @@
         
 
 
-  <script>
-    var _mtac = {};
-    (function() {
-      var mta = document.createElement("script");
-      mta.src = "https://pingjs.qq.com/h5/stats.js";
-      mta.setAttribute("name", "MTAH5");
-      mta.setAttribute("sid", "500646422");
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(mta, s);
-    })();
-  </script>
+
+<script>
+  	var _mtac = {};
+  	(function() {
+  		var mta = document.createElement("script");
+  		mta.src = "https://pingjs.qq.com/h5/stats.js?v2.0.4";
+  		mta.setAttribute("name", "MTAH5");
+  		mta.setAttribute("sid", "500646422");
+
+  		var s = document.getElementsByTagName("script")[0];
+  		s.parentNode.insertBefore(mta, s);
+  	})();
+</script>
 
 
 
-  <script>
+  <script type="text/javascript">
     (function() {
       var hm = document.createElement("script");
       hm.src = "//tajs.qq.com/stats?sId=66030421";
@@ -802,15 +726,19 @@
 
 
 
-
         
       </div>
     </footer>
 
     
-
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
+    
+	
     
 
     
@@ -818,7 +746,7 @@
 
   
 
-<script>
+<script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -850,72 +778,56 @@
 
 
   
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
-
   
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=7.0.1"></script>
-
-  <script src="/js/src/motion.js?v=7.0.1"></script>
-
-
 
   
   
-
-
-  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
-
-
-
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
 
   
-  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/js/src/post-details.js?v=7.0.1"></script>
-
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
 
 
   
 
 
-  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
 
 
   
 
-  
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
 
   
 
-  
-  
-  <script id="dsq-count-scr" src="https://ascen.disqus.com/count.js" async></script>
 
 
-<script>
-  var disqus_config = function() {
-    this.page.url = "http://ascen.me/2016/07/29/apns_summary/";
-    this.page.identifier = "2016/07/29/apns_summary/";
-    this.page.title = 'APNS原理总结';
-    };
-  function loadComments() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://ascen.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', '' + +new Date());
-    (d.head || d.body).appendChild(s);
-  }
   
-    loadComments();
-  
-</script>
+
+
+
+
+
 
 
 
@@ -923,8 +835,6 @@
 
   
 
-
-  
 
 
 
@@ -938,9 +848,6 @@
   
 
   
-
-  
-
   
 
   
